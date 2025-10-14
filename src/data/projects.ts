@@ -30,7 +30,7 @@ export const projects: Project[] = [
     title: 'Financial GNN Predictor',
     description: 'Spatio-Temporal Graph Neural Network for predicting stock return dominance using market features and options data.',
     period: 'Sep 2024 - Jul 2025',
-    github: 'https://github.com/yourusername/financial-gnn',
+    type: 'private',
     screenshot: '/screenshots/gnn-predictor.png',
     features: [
       'Integrated stock features and options market data into GNN architecture',
@@ -54,6 +54,7 @@ export const projects: Project[] = [
     title: 'Stockmate Trading Platform',
     description: 'Comprehensive stock backtesting platform with strategy management and performance analysis tools for traders.',
     period: 'Jun 2023 - Dec 2023',
+    type: 'public',
     github: 'https://github.com/yourusername/stockmate',
     screenshot: '/screenshots/stockmate.png',
     features: [
@@ -78,7 +79,7 @@ export const projects: Project[] = [
     title: 'Sign Language Annotation Platform',
     description: 'User-friendly platform for annotating sign language video data to support AI training at ITRI.',
     period: 'Jul 2023 - Sep 2023',
-    github: 'https://github.com/yourusername/annotation-platform',
+    type: 'private',
     screenshot: '/screenshots/annotation-platform.png',
     features: [
       'Video annotation interface with frame-level control',

@@ -143,18 +143,30 @@ export default function ProjectsTab() {
             </div>
           </div>
 
-          {/* GitHub Link */}
-          <div className="pt-4 border-t border-slate-700">
-            <a
-              href={currentProject.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-blue-300 font-semibold transition-colors"
-            >
-              <Github size={20} />
-              查看原始碼
-            </a>
-          </div>
+          {/* GitHub Link - Only for Public Projects */}
+          {currentProject.type === 'public' && currentProject.github && (
+            <div className="pt-4 border-t border-slate-700">
+              <a
+                href={currentProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-blue-300 font-semibold transition-colors"
+              >
+                <Github size={20} />
+                查看原始碼
+              </a>
+            </div>
+          )}
+
+          {/* Private Project Notice */}
+          {currentProject.type === 'private' && (
+            <div className="pt-4 border-t border-slate-700">
+              <div className="flex items-center gap-2 text-orange-300 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-3">
+                <span className="text-lg">🔒</span>
+                <span className="text-sm font-medium">This is a private project. Source code is not publicly available.</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -198,6 +210,17 @@ export default function ProjectsTab() {
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Project Type Badge */}
+              <div className="absolute top-3 right-3">
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                  project.type === 'public' 
+                    ? 'bg-green-500/80 text-white' 
+                    : 'bg-orange-500/80 text-white'
+                }`}>
+                  {project.type === 'public' ? 'Public' : 'Private'}
+                </span>
+              </div>
             </div>
 
             {/* Content */}
