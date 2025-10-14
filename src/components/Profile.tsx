@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 
-export default function About() {
+export default function Profile() {
   return (
     <div>
       {/* Header with Avatar and Name */}
@@ -19,29 +19,43 @@ export default function About() {
         </div>
       </div>
 
-      {/* Bio Section */}
-      <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 mb-8">
-        <p className="text-lg text-slate-300 leading-relaxed mb-4">
-          A second-year Master&apos;s student in Information Management at National Central University, specializing in backend development and cloud deployment. Passionate about building complete MLOps pipelines that bridge the gap between research and production.
-        </p>
-        <p className="text-lg text-slate-300 leading-relaxed">
-          With hands-on experience at TSMC and ITRI, I&apos;ve developed expertise in deploying ML systems at scale, optimizing neural networks for financial forecasting, and streamlining operational workflows through intelligent automation.
-        </p>
-      </div>
-
       {/* Quick Facts */}
       <div className="bg-blue-950/20 backdrop-blur-xl p-8 rounded-lg border border-blue-500/30">
         <h3 className="text-xl font-bold text-blue-300 mb-6">Quick Facts</h3>
         <ul className="space-y-4">
           <li className="text-slate-300">📍 Based in Taiwan</li>
-          <li className="text-slate-300">🎓 M.S. Information Management</li>
-          <li className="text-slate-300">🔝 GPA: 90.50/100 (Top 19%)</li>
           <li className="text-slate-300">🌐 TOEIC: 830</li>
           <li className="text-slate-300">💼 Active MLOps Enthusiast</li>
         </ul>
+
+        {/* Education Section */}
+        <div className="mt-8 pt-6 border-t border-blue-500/20">
+          <h4 className="text-lg font-semibold text-blue-300 mb-4">🎓 Education</h4>
+          <div className="space-y-4">
+            {/* Master's Degree */}
+            <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700">
+              <p className="text-slate-200 font-semibold mb-1">M.S. Information Management</p>
+              <p className="text-slate-400 text-sm mb-2">National Central University | 2024 - Present</p>
+              <div className="flex gap-4 text-sm">
+                <span className="text-blue-300">GPA: 90.50/100</span>
+                <span className="text-blue-300">Top 19%</span>
+              </div>
+            </div>
+            
+            {/* Bachelor's Degree */}
+            <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700">
+              <p className="text-slate-200 font-semibold mb-1">B.S. Information Management</p>
+              <p className="text-slate-400 text-sm mb-2">National Central University | 2021 - 2024</p>
+              <div className="flex gap-4 text-sm">
+                <span className="text-blue-300">GPA: 89.64/100</span>
+                <span className="text-blue-300">Rank: 20/109 (18%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
         
         {/* Social Links */}
-        <div className="flex gap-6 mt-8">
+        <div className="flex gap-6 mt-8 pt-6 border-t border-blue-500/20">
           <a 
             href="https://github.com" 
             target="_blank" 

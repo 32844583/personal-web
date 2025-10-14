@@ -3,11 +3,21 @@
 import { useState } from 'react';
 import { skillCategories } from '@/data/skills';
 
-export default function SkillsTab() {
+export default function AboutTab() {
   const [activeCategory, setActiveCategory] = useState<number>(0);
 
   return (
     <div className="space-y-6">
+      {/* Bio Section */}
+      <div className="bg-slate-700/30 rounded-lg p-6 border border-slate-600 mb-6">
+        <p className="text-slate-300 leading-relaxed mb-4">
+          A second-year Master&apos;s student in Information Management at National Central University, specializing in backend development and cloud deployment. Passionate about building complete MLOps pipelines that bridge the gap between research and production.
+        </p>
+        <p className="text-slate-300 leading-relaxed">
+          With hands-on experience at TSMC and ITRI, I&apos;ve developed expertise in deploying ML systems at scale, optimizing neural networks for financial forecasting, and streamlining operational workflows through intelligent automation.
+        </p>
+      </div>
+
       {/* Category Buttons */}
       <div className="flex flex-wrap gap-3">
         {skillCategories.map((category, idx) => (

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import About from '@/components/About';
+import About from '@/components/Profile';
 import ExperienceTab from '@/components/ExperienceTab';
-import SkillsTab from '@/components/SkillsTab';
+import AboutTab from '@/components/AboutTab';
 import ProjectsTab from '@/components/ProjectsTab';
 import Footer from '@/components/Footer';
 
@@ -13,9 +13,9 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('experience');
 
   const tabs: { key: TabType; label: string }[] = [
-    { key: 'experience', label: 'Professional Experience' },
-    { key: 'skills', label: 'Core Competencies' },
-    { key: 'projects', label: 'Featured Projects' }
+    { key: 'experience', label: 'Experience' },
+    { key: 'skills', label: 'About' },
+    { key: 'projects', label: 'Projects' }
   ];
 
   return (
@@ -49,7 +49,7 @@ export default function Home() {
             {/* Content Area */}
             <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 flex-1">
               {activeTab === 'experience' && <ExperienceTab />}
-              {activeTab === 'skills' && <SkillsTab />}
+              {activeTab === 'skills' && <AboutTab />}
               {activeTab === 'projects' && <ProjectsTab />}
             </div>
           </div>
