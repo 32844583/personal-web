@@ -57,12 +57,22 @@ export default function ProjectsTab() {
 
         {/* Modal Content */}
         <div className="p-8 space-y-6">
-          {/* Image Placeholder */}
-          <div className="bg-slate-700 rounded-lg border-2 border-dashed border-slate-600 h-64 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-gray-400 mb-2 text-lg">🖼️ Project Screenshot</p>
-              <p className="text-gray-500 text-sm">Image placeholder - upload your screenshot here</p>
-            </div>
+          {/* Screenshot */}
+          <div className="bg-slate-700 rounded-lg border-2 border-slate-600 overflow-hidden">
+            {currentProject.screenshot ? (
+              <img 
+                src={currentProject.screenshot} 
+                alt={`${currentProject.title} screenshot`}
+                className="w-full h-auto object-cover"
+              />
+            ) : (
+              <div className="h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <p className="text-gray-400 mb-2 text-lg">🖼️ Project Screenshot</p>
+                  <p className="text-gray-500 text-sm">No screenshot available</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Features */}

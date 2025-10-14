@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Navigation from '@/components/Navigation';
 import About from '@/components/About';
 import ExperienceTab from '@/components/ExperienceTab';
 import SkillsTab from '@/components/SkillsTab';
@@ -21,11 +20,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <Navigation />
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.5fr] gap-12 min-h-[80vh]">
+      <section className="max-w-[95%] mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_2fr] gap-8 min-h-[85vh]">
           {/* Left Side - About */}
           <About />
 
@@ -49,7 +47,7 @@ export default function Home() {
             </div>
 
             {/* Content Area */}
-            <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 overflow-y-auto max-h-[65vh] flex-1">
+            <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 flex-1">
               {activeTab === 'experience' && <ExperienceTab />}
               {activeTab === 'skills' && <SkillsTab />}
               {activeTab === 'projects' && <ProjectsTab />}

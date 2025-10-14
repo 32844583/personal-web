@@ -8,6 +8,7 @@ export interface Project {
   description: string;
   period: string;
   github: string;
+  screenshot?: string;
   features: string[];
   tech: string[];
   challenges: Challenge[];
@@ -27,7 +28,13 @@ export interface Experience {
   techs: string[];
 }
 
+export interface Tool {
+  name: string;
+  icon?: string;
+  proficiency: number;
+}
+
 export interface SkillCategory {
   title: string;
-  tools: string[];
+  tools: Tool[];
 }

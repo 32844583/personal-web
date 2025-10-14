@@ -22,10 +22,10 @@ export default function About() {
       {/* Bio Section */}
       <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 mb-8">
         <p className="text-lg text-slate-300 leading-relaxed mb-4">
-          A second-year Master's student in Information Management at National Central University, specializing in backend development and cloud deployment. Passionate about building complete MLOps pipelines that bridge the gap between research and production.
+          A second-year Master&apos;s student in Information Management at National Central University, specializing in backend development and cloud deployment. Passionate about building complete MLOps pipelines that bridge the gap between research and production.
         </p>
         <p className="text-lg text-slate-300 leading-relaxed">
-          With hands-on experience at TSMC and ITRI, I've developed expertise in deploying ML systems at scale, optimizing neural networks for financial forecasting, and streamlining operational workflows through intelligent automation.
+          With hands-on experience at TSMC and ITRI, I&apos;ve developed expertise in deploying ML systems at scale, optimizing neural networks for financial forecasting, and streamlining operational workflows through intelligent automation.
         </p>
       </div>
 

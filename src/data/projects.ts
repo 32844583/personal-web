@@ -9,6 +9,7 @@ export const projects: Project[] = [
     description: 'Intelligent Teams bot powered by Langchain Agent to streamline daily operational workflows at TSMC manufacturing fabs.',
     period: 'Jul 2025 - Sep 2025',
     github: 'https://github.com/yourusername/querymaster',
+    screenshot: '/screenshots/querymaster.png', // 添加截圖路徑
     features: [
       'Integrated Kibana, Prometheus, and databases as dynamic tools for Agent-driven queries',
       'Deployed to multiple fabs with traffic splitting via Azure DevOps',
@@ -34,6 +35,7 @@ export const projects: Project[] = [
     description: 'Spatio-Temporal Graph Neural Network for predicting stock return dominance using market features and options data.',
     period: 'Sep 2024 - Jul 2025',
     github: 'https://github.com/yourusername/financial-gnn',
+    screenshot: '/screenshots/gnn-predictor.png',
     features: [
       'Integrated stock features and options market data into GNN architecture',
       'Achieved superior accuracy compared to multivariate statistical models',
@@ -59,6 +61,7 @@ export const projects: Project[] = [
     description: 'Comprehensive stock backtesting platform with strategy management and performance analysis tools for traders.',
     period: 'Jun 2023 - Dec 2023',
     github: 'https://github.com/yourusername/stockmate',
+    screenshot: '/screenshots/stockmate.png',
     features: [
       'Backtesting engine for technical indicators and trading strategies',
       'Trade analysis and detection with objective performance evaluation',
@@ -84,6 +87,7 @@ export const projects: Project[] = [
     description: 'User-friendly platform for annotating sign language video data to support AI training at ITRI.',
     period: 'Jul 2023 - Sep 2023',
     github: 'https://github.com/yourusername/annotation-platform',
+    screenshot: '/screenshots/annotation-platform.png',
     features: [
       'Video annotation interface with frame-level control',
       'Search functionality for efficient data navigation',
