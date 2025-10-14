@@ -11,10 +11,10 @@ export default function AboutTab() {
       {/* Bio Section */}
       <div className="bg-slate-700/30 rounded-lg p-6 border border-slate-600 mb-6">
         <p className="text-slate-300 leading-relaxed mb-4">
-          A second-year Master&apos;s student in Information Management at National Central University, specializing in backend development and cloud deployment. Passionate about building complete MLOps pipelines that bridge the gap between research and production.
+          我是<span className="text-blue-300 font-semibold">謝子尉</span>，目前就讀於中央大學資管所。我擅長<span className="text-blue-300 font-semibold">系統架構設計與全端開發</span>，技術棧涵蓋 <span className="text-cyan-300">Flask、Django、FastAPI</span> 以及 DevOps 工具鏈（<span className="text-cyan-300">Kubernetes、Azure DevOps、ArgoCD</span>）。在開發上，我重視<span className="text-blue-300 font-semibold">可維護性與擴充性</span>，習慣採用設計模式規劃系統架構。
         </p>
         <p className="text-slate-300 leading-relaxed">
-          With hands-on experience at TSMC and ITRI, I&apos;ve developed expertise in deploying ML systems at scale, optimizing neural networks for financial forecasting, and streamlining operational workflows through intelligent automation.
+          同時我對 <span className="text-blue-300 font-semibold">AI/ML 領域</span>有濃厚興趣，特別是 <span className="text-cyan-300">Langchain、GNN、時間序列預測</span>等技術的應用。未來我的職涯目標是朝 <span className="text-blue-300 font-semibold">MLOps</span> 發展，專注於 <span className="text-cyan-300">AI Agent 系統維護與時間序列模型的部署與優化</span>，期許能將機器學習模型穩定地落地到生產環境，創造實際價值。
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export default function AboutTab() {
             <div key={tool.name} className="flex flex-col gap-3">
               {/* Tool Icon and Name */}
               <div className="flex flex-col items-center gap-2">
-                <div className="w-16 h-16 rounded-lg bg-slate-800 border-2 border-slate-600 flex items-center justify-center overflow-hidden">
+                <div className="w-16 h-16 rounded-lg bg-white border-2 border-slate-400 flex items-center justify-center overflow-hidden p-2">
                   {tool.icon ? (
                     <img 
                       src={tool.icon} 
@@ -53,7 +53,7 @@ export default function AboutTab() {
                       className="w-12 h-12 object-contain"
                     />
                   ) : (
-                    <span className="text-lg font-bold text-blue-300">
+                    <span className="text-lg font-bold text-slate-700">
                       {tool.name.substring(0, 3).toUpperCase()}
                     </span>
                   )}

@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { experiences } from '@/data/experiences';
 
 export default function ExperienceTab() {
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [expandedSection, setExpandedSection] = useState<string | null>('tsmc');
 
   const toggleSection = (key: string) => {
     setExpandedSection(expandedSection === key ? null : key);
