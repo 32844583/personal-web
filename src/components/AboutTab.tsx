@@ -8,13 +8,13 @@ export default function AboutTab() {
 
   return (
     <div className="space-y-6">
-      {/* Bio Section */}
+      {/* Bio Section - 增大文字並標示重點 */}
       <div className="bg-slate-700/30 rounded-lg p-6 border border-slate-600 mb-6">
-        <p className="text-slate-300 leading-relaxed mb-4">
-          我是<span className="text-blue-300 font-semibold">謝子尉</span>，目前就讀於中央大學資管所。我擅長<span className="text-blue-300 font-semibold">系統架構設計與全端開發</span>，技術棧涵蓋 <span className="text-cyan-300">Flask、Django、FastAPI</span> 以及 DevOps 工具鏈（<span className="text-cyan-300">Kubernetes、Azure DevOps、ArgoCD</span>）。在開發上，我重視<span className="text-blue-300 font-semibold">可維護性與擴充性</span>，習慣採用設計模式規劃系統架構。
+        <p className="text-slate-200 text-lg leading-relaxed mb-4">
+          我是<span className="text-blue-400 font-semibold">謝子尉</span>，目前就讀於中央大學資管所。我擅長<span className="text-blue-400 font-semibold">系統架構設計與全端開發</span>，技術棧涵蓋 Flask、Django、FastAPI 以及 DevOps 工具鏈（Kubernetes、Azure DevOps、ArgoCD）。在開發上，我重視<span className="text-blue-400 font-semibold">可維護性與擴充性</span>，習慣採用設計模式規劃系統架構。
         </p>
-        <p className="text-slate-300 leading-relaxed">
-          同時我對 <span className="text-blue-300 font-semibold">AI/ML 領域</span>有濃厚興趣，特別是 <span className="text-cyan-300">Langchain、GNN、時間序列預測</span>等技術的應用。未來我的職涯目標是朝 <span className="text-blue-300 font-semibold">MLOps</span> 發展，專注於 <span className="text-cyan-300">AI Agent 系統維護與時間序列模型的部署與優化</span>，期許能將機器學習模型穩定地落地到生產環境，創造實際價值。
+        <p className="text-slate-200 text-lg leading-relaxed">
+          同時我對 <span className="text-blue-400 font-semibold">AI/ML 領域</span>有濃厚興趣，特別是 Langchain、GNN、時間序列預測等技術的應用。未來我的職涯目標是朝 <span className="text-blue-400 font-semibold">MLOps</span> 發展，專注於 AI Agent 系統維護與時間序列模型的部署與優化，期許能將機器學習模型穩定地落地到生產環境，創造實際價值。
         </p>
       </div>
 
@@ -43,9 +43,9 @@ export default function AboutTab() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {skillCategories[activeCategory].tools.map((tool) => (
             <div key={tool.name} className="flex flex-col gap-3">
-              {/* Tool Icon and Name */}
+              {/* Tool Icon and Name - 背景改為較深的灰色 */}
               <div className="flex flex-col items-center gap-2">
-                <div className="w-16 h-16 rounded-lg bg-white border-2 border-slate-400 flex items-center justify-center overflow-hidden p-2">
+                <div className="w-16 h-16 rounded-lg bg-slate-600 border-2 border-slate-500 flex items-center justify-center overflow-hidden p-2">
                   {tool.icon ? (
                     <img 
                       src={tool.icon} 

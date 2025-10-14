@@ -29,15 +29,15 @@ export default function Home() {
 
           {/* Right Side - Tabs and Content */}
           <div className="flex flex-col">
-            {/* Tabs */}
-            <div className="flex flex-wrap gap-4 mb-8">
+            {/* Tabs - 增大按鈕尺寸和間距 */}
+            <div className="flex flex-wrap gap-6 mb-8">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`px-6 py-3 rounded-md text-sm font-semibold transition-all ${
+                  className={`px-8 py-4 rounded-lg text-base font-semibold transition-all ${
                     activeTab === tab.key
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-blue-600 text-white shadow-lg'
                       : 'bg-slate-800 text-white hover:bg-slate-700'
                   }`}
                 >
