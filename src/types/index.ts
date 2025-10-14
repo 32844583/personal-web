@@ -3,11 +3,10 @@
 export interface Project {
   id: string;
   title: string;
-  emoji: string;
-  color: string;
   description: string;
   period: string;
-  github: string;
+  type: 'public' | 'private';
+  github?: string;
   screenshot?: string;
   features: string[];
   tech: string[];

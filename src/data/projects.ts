@@ -4,12 +4,10 @@ export const projects: Project[] = [
   {
     id: 'querymaster',
     title: 'QueryMaster Chatbot',
-    emoji: '🤖',
-    color: 'from-blue-600 to-cyan-600',
     description: 'Intelligent Teams bot powered by Langchain Agent to streamline daily operational workflows at TSMC manufacturing fabs.',
     period: 'Jul 2025 - Sep 2025',
-    github: 'https://github.com/yourusername/querymaster',
-    screenshot: '/screenshots/querymaster.png', // 添加截圖路徑
+    type: 'private',
+    screenshot: '/screenshots/querymaster.png',
     features: [
       'Integrated Kibana, Prometheus, and databases as dynamic tools for Agent-driven queries',
       'Deployed to multiple fabs with traffic splitting via Azure DevOps',
@@ -30,8 +28,6 @@ export const projects: Project[] = [
   {
     id: 'gnn-predictor',
     title: 'Financial GNN Predictor',
-    emoji: '📈',
-    color: 'from-purple-600 to-blue-600',
     description: 'Spatio-Temporal Graph Neural Network for predicting stock return dominance using market features and options data.',
     period: 'Sep 2024 - Jul 2025',
     github: 'https://github.com/yourusername/financial-gnn',
@@ -56,8 +52,6 @@ export const projects: Project[] = [
   {
     id: 'stockmate',
     title: 'Stockmate Trading Platform',
-    emoji: '💰',
-    color: 'from-green-600 to-emerald-600',
     description: 'Comprehensive stock backtesting platform with strategy management and performance analysis tools for traders.',
     period: 'Jun 2023 - Dec 2023',
     github: 'https://github.com/yourusername/stockmate',
@@ -82,8 +76,6 @@ export const projects: Project[] = [
   {
     id: 'annotation-platform',
     title: 'Sign Language Annotation Platform',
-    emoji: '🏷️',
-    color: 'from-orange-600 to-red-600',
     description: 'User-friendly platform for annotating sign language video data to support AI training at ITRI.',
     period: 'Jul 2023 - Sep 2023',
     github: 'https://github.com/yourusername/annotation-platform',

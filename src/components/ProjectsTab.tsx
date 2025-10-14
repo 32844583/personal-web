@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Github, X } from 'lucide-react';
+import { Github, X, Calendar } from 'lucide-react';
 import { projects } from '@/data/projects';
 import { createPortal } from 'react-dom';
 
 export default function ProjectsTab() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [sortByDate, setSortByDate] = useState<'newest' | 'oldest'>('newest');
 
   useEffect(() => {
     setMounted(true);
@@ -20,6 +21,19 @@ export default function ProjectsTab() {
   const closeModal = () => {
     setSelectedProject(null);
   };
+
+  const toggleSort = () => {
+    setSortByDate(prev => prev === 'newest' ? 'oldest' : 'newest');
+  };
+
+  // 按日期排序專案
+  const sortedProjects = [...projects].sort((a, b) => {
+    const dateA = new Date(a.period.split(' - ')[1] || a.period.split(' - ')[0]);
+    const dateB = new Date(b.period.split(' - ')[1] || b.period.split(' - ')[0]);
+    return sortByDate === 'newest' 
+      ? dateB.getTime() - dateA.getTime() 
+      : dateA.getTime() - dateB.getTime();
+  });
 
   const currentProject = projects.find(p => p.id === selectedProject);
 
@@ -34,18 +48,27 @@ export default function ProjectsTab() {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className={`bg-gradient-to-r ${currentProject.color} p-6 flex justify-between items-start sticky top-0`} style={{ zIndex: 10 }}>
-          <div className="flex gap-4 items-start flex-1 min-w-0">
-            <span className="text-5xl flex-shrink-0">{currentProject.emoji}</span>
-            <div className="flex-1 min-w-0">
-              <h2 className="text-3xl font-bold text-white mb-2">
+        <div className="bg-gradient-to-r from-slate-700 to-slate-800 p-6 flex justify-between items-start sticky top-0 border-b border-slate-600" style={{ zIndex: 10 }}>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-3xl font-bold text-white">
                 {currentProject.title}
               </h2>
-              <p className="text-blue-100 text-lg mb-1">
-                {currentProject.description}
-              </p>
-              <p className="text-blue-50">📅 {currentProject.period}</p>
+              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                currentProject.type === 'public' 
+                  ? 'bg-green-500/20 text-green-300 border border-green-500/50' 
+                  : 'bg-orange-500/20 text-orange-300 border border-orange-500/50'
+              }`}>
+                {currentProject.type === 'public' ? 'Public' : 'Private'}
+              </span>
             </div>
+            <p className="text-slate-300 text-lg mb-1">
+              {currentProject.description}
+            </p>
+            <p className="text-slate-400 flex items-center gap-2">
+              <Calendar size={16} />
+              {currentProject.period}
+            </p>
           </div>
           <button
             onClick={closeModal}
@@ -139,36 +162,59 @@ export default function ProjectsTab() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projects.map((project) => (
+      {/* Sort Button */}
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={toggleSort}
+          className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors text-sm font-medium"
+        >
+          <Calendar size={18} />
+          {sortByDate === 'newest' ? 'Newest First' : 'Oldest First'}
+        </button>
+      </div>
+
+      {/* Project Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sortedProjects.map((project) => (
           <div 
             key={project.id} 
-            className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden flex flex-col"
+            className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden hover:border-blue-500 transition-all duration-300 cursor-pointer group"
+            onClick={() => openModal(project.id)}
           >
-            <div
-              className={`w-full bg-gradient-to-r ${project.color} p-4 min-h-[6rem] flex items-center`}
-            >
-              <div className="flex gap-3 items-start w-full">
-                <span className="text-3xl flex-shrink-0">{project.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-blue-100 text-sm mb-2 leading-snug">
-                    {project.description}
-                  </p>
-                  <p className="text-blue-50 text-xs">📅 {project.period}</p>
+            {/* Image */}
+            <div className="relative h-48 bg-slate-700 overflow-hidden">
+              {project.screenshot ? (
+                <img 
+                  src={project.screenshot} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <p className="text-gray-400 text-lg">🖼️</p>
+                    <p className="text-gray-500 text-sm">No Image</p>
+                  </div>
                 </div>
-              </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
 
-            <div className="p-6 flex flex-col">
-              <button
-                onClick={() => openModal(project.id)}
-                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
-              >
-                View Detail
-              </button>
+            {/* Content */}
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-slate-400 text-sm mb-3 flex items-center gap-2">
+                <Calendar size={14} />
+                {project.period}
+              </p>
+              <p className="text-slate-300 text-sm leading-relaxed line-clamp-3">
+                {project.description}
+              </p>
+              <div className="mt-4 flex items-center text-blue-400 text-sm font-medium">
+                View Details →
+              </div>
             </div>
           </div>
         ))}
