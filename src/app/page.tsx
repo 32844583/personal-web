@@ -10,11 +10,11 @@ import Footer from '@/components/Footer';
 type TabType = 'experience' | 'skills' | 'projects';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabType>('experience');
+  const [activeTab, setActiveTab] = useState<TabType>('skills');
 
   const tabs: { key: TabType; label: string }[] = [
-    { key: 'experience', label: 'Experience' },
     { key: 'skills', label: 'About' },
+    { key: 'experience', label: 'Experience' },
     { key: 'projects', label: 'Projects' }
   ];
 
