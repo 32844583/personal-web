@@ -1,103 +1,70 @@
-import Image from "next/image";
+// app/page.tsx
 
-export default function Home() {
+// 這是我們頁面的主要函式，Next.js 會把它渲染成 HTML
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    // <main> 是 HTML 的主要內容區塊
+    // className 裡面的東西是 Tailwind CSS，用來設定樣式
+    // 這裡我們設定了一個深灰色的背景、讓內容垂直水平置中
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-8">
+      
+      {/* 主要的內容容器，設定最大寬度和文字置中 */}
+      <div className="max-w-2xl text-center">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* 頭像圖片
+          - 你可以將自己的頭像圖片命名為 "avatar.png" (或其他格式)
+          - 然後把它放到專案的 public/ 資料夾底下
+          - Next.js 會自動找到它
+        */}
+        {/* <img 
+          src="/avatar.png" 
+          alt="我的頭像" 
+          className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-yellow-400"
+        /> */}
+
+        {/* 大標題：你的名字 */}
+        <h1 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-4">
+          你好，我是 你的名字
+        </h1>
+
+        {/* 副標題：你的職稱或一句話介紹 */}
+        <p className="text-lg md:text-xl text-gray-300 mb-8">
+          一位熱愛網頁開發與解決問題的 你的職稱，例如：前端工程師
+        </p>
+
+        {/* 主要的自我介紹段落 */}
+        <div className="text-left bg-gray-800 p-6 rounded-lg shadow-lg">
+          <p className="text-base leading-relaxed mb-4">
+            歡迎來到我的個人網站。我專注於使用現代化的技術，例如 React 和 Next.js，來打造流暢且高效的使用者體驗。
+          </p>
+          <p className="text-base leading-relaxed">
+            我熱衷於學習新知，並樂於將所學應用於實際專案中。目前我正在探索：
+          </p>
+          {/* 技能或興趣清單 */}
+          <ul className="list-disc list-inside mt-4 space-y-2">
+            <li>Cloudflare Pages 網站部署</li>
+            <li>使用 Tailwind CSS 進行快速樣式設計</li>
+            <li>探索後端技術與資料庫</li>
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* 社群連結 */}
+        <div className="mt-10">
+          <p className="text-gray-400 mb-4">你可以在這些地方找到我：</p>
+          <div className="flex justify-center space-x-6">
+            <a href="https://github.com/你的GitHub帳號" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-yellow-400 transition-colors">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/你的LinkedIn帳號" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-yellow-400 transition-colors">
+              LinkedIn
+            </a>
+            <a href="mailto:你的Email信箱" className="text-gray-300 hover:text-yellow-400 transition-colors">
+              Email
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </main>
   );
 }
