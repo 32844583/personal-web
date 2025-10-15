@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ArrowUpDown, GraduationCap, Award } from 'lucide-react';
 import { subjectCategories } from '@/data/subjects';
 import { Subject } from '@/types';
@@ -8,6 +8,8 @@ import { Subject } from '@/types';
 export default function SubjectTab() {
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const [sortBy, setSortBy] = useState<'grade' | 'score'>('grade');
+  const [hoveredVertex, setHoveredVertex] = useState<number | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   // 根據選擇的類別決定顯示的科目
   const currentSubjects = subjectCategories[activeCategory].subjects;
@@ -29,29 +31,23 @@ export default function SubjectTab() {
     return Math.floor(score / 10);
   };
 
-  // 計算各領域的平均分數
-  const calculateAbilityScores = () => {
-    const abilities = {
-      '資料庫設計': ['資料庫管理'],
-      '人工智慧': ['機器學習概論', '人工智慧與機器學習', 'AI人工智慧導論', '自然語言處理', '圖像辨識的企業應用', '資料科學與機器學習'],
-      '系統設計': ['系統分析與設計', '軟體工程I', '網頁設計', '資訊系統發展專題I', '資訊系統發展專題II'],
-      '邏輯能力': ['資料與檔案結構', '演算法', '程式設計概念與方法(C)', '程式設計(Java)', '程式設計(JavaScript)', 'Java程式設計進階', '程式設計-Python'],
-      '作業系統': ['作業系統(Unix)', '作業系統操作與管理(Linux)', 'Linux與邊緣運算'],
-      '資安網路': ['企業資料通訊', '進階區塊鏈應用與隱私防護']
-    };
-
-    const allSubjects = subjectCategories.flatMap(cat => cat.subjects);
-    
-    return Object.entries(abilities).map(([ability, subjectNames]) => {
-      const relatedSubjects = allSubjects.filter(s => subjectNames.includes(s.name));
-      const avgScore = relatedSubjects.length > 0
-        ? relatedSubjects.reduce((sum, s) => sum + s.score, 0) / relatedSubjects.length
+  // 計算各領域的平均分數和科目數量
+  const calculateCategoryScores = () => {
+    return subjectCategories.map(category => {
+      const subjects = category.subjects;
+      const avgScore = subjects.length > 0
+        ? subjects.reduce((sum, s) => sum + s.score, 0) / subjects.length
         : 0;
-      return { ability, score: avgScore };
+      return {
+        category: category.title,
+        score: avgScore,
+        count: subjects.length,
+        subjects: subjects
+      };
     });
   };
 
-  const abilityScores = calculateAbilityScores();
+  const categoryScores = calculateCategoryScores();
 
   const toggleSort = () => {
     setSortBy(prev => prev === 'grade' ? 'score' : 'grade');
@@ -59,7 +55,178 @@ export default function SubjectTab() {
 
   return (
     <div className="space-y-6">
-      {/* Category Buttons and Sort Button */}
+      {/* Hexagon Ability Chart - 移到最上方 */}
+      <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700 mb-6 relative">
+        <h3 className="text-xl font-bold text-blue-300 mb-6 text-center">能力六角圖</h3>
+        <div className="flex justify-center items-start gap-8">
+          <svg 
+            ref={svgRef}
+            width="400" 
+            height="400" 
+            viewBox="0 0 400 400" 
+            className="overflow-visible flex-shrink-0"
+          >
+            {/* 繪製背景網格 (10個層級) */}
+            {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((level) => {
+              const points = Array.from({ length: 6 }, (_, i) => {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const radius = (level / 100) * 150;
+                const x = 200 + radius * Math.cos(angle);
+                const y = 200 + radius * Math.sin(angle);
+                return `${x},${y}`;
+              }).join(' ');
+              
+              return (
+                <polygon
+                  key={level}
+                  points={points}
+                  fill="none"
+                  stroke={level === 100 ? '#475569' : '#334155'}
+                  strokeWidth={level === 100 ? '2' : '1'}
+                  opacity={level === 100 ? '0.5' : '0.3'}
+                />
+              );
+            })}
+
+            {/* 繪製從中心到各頂點的線 */}
+            {categoryScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const x = 200 + 150 * Math.cos(angle);
+              const y = 200 + 150 * Math.sin(angle);
+              return (
+                <line
+                  key={i}
+                  x1="200"
+                  y1="200"
+                  x2={x}
+                  y2={y}
+                  stroke="#334155"
+                  strokeWidth="1"
+                  opacity="0.3"
+                />
+              );
+            })}
+
+            {/* 繪製能力數據多邊形 */}
+            <polygon
+              points={categoryScores.map((item, i) => {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const radius = (item.score / 100) * 150;
+                const x = 200 + radius * Math.cos(angle);
+                const y = 200 + radius * Math.sin(angle);
+                return `${x},${y}`;
+              }).join(' ')}
+              fill="rgba(59, 130, 246, 0.3)"
+              stroke="#3b82f6"
+              strokeWidth="2"
+            />
+
+            {/* 繪製數據點 */}
+            {categoryScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const radius = (item.score / 100) * 150;
+              const x = 200 + radius * Math.cos(angle);
+              const y = 200 + radius * Math.sin(angle);
+              return (
+                <g key={i}>
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r="5"
+                    fill="#3b82f6"
+                    stroke="#fff"
+                    strokeWidth="2"
+                  />
+                  {/* 增加更大的透明互動區域 */}
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r="40"
+                    fill="transparent"
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={() => {
+                      setHoveredVertex(i);
+                    }}
+                    onMouseLeave={() => setHoveredVertex(null)}
+                  />
+                </g>
+              );
+            })}
+
+            {/* 標籤文字 */}
+            {categoryScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const labelRadius = 175;
+              const x = 200 + labelRadius * Math.cos(angle);
+              const y = 200 + labelRadius * Math.sin(angle);
+              
+              return (
+                <g key={i}>
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-slate-200 font-semibold text-sm"
+                  >
+                    {item.category}
+                  </text>
+                  <text
+                    x={x}
+                    y={y + 18}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-blue-400 font-bold text-base"
+                  >
+                    {item.score.toFixed(1)}
+                  </text>
+                  <text
+                    x={x}
+                    y={y + 34}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-slate-400 text-xs"
+                  >
+                    ({item.count}科)
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+          
+          {/* Tooltip - 固定在右側 */}
+          <div className="w-64 flex-shrink-0">
+            {hoveredVertex !== null ? (
+              <div className="bg-slate-900 border-2 border-blue-500 rounded-lg p-4 shadow-2xl">
+                <h4 className="text-blue-300 font-bold mb-2 text-center border-b border-slate-700 pb-2">
+                  {categoryScores[hoveredVertex].category}
+                </h4>
+                <div className="space-y-1 max-h-[300px] overflow-y-auto">
+                  {categoryScores[hoveredVertex].subjects.map((subject, idx) => (
+                    <div key={idx} className="flex justify-between items-center text-sm py-1">
+                      <span className="text-slate-300">{subject.name}</span>
+                      <span className="text-blue-400 font-semibold ml-3">{subject.score}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2 pt-2 border-t border-slate-700 text-center">
+                  <span className="text-slate-400 text-xs">平均: </span>
+                  <span className="text-blue-400 font-bold">{categoryScores[hoveredVertex].score.toFixed(1)}</span>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-slate-800/50 border-2 border-slate-600 rounded-lg p-4 h-full flex items-center justify-center">
+                <p className="text-slate-400 text-sm text-center">
+                  將滑鼠移到六角圖上<br />查看詳細資訊
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+        
+      </div>
+
+      {/* Category Buttons and Sort Button - 移到六角形下方 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3">
           {subjectCategories.map((category, idx) => (
@@ -86,119 +253,6 @@ export default function SubjectTab() {
           {sortBy === 'grade' ? '按年級排序' : '按成績排序'}
           <ArrowUpDown size={16} />
         </button>
-      </div>
-
-      {/* Hexagon Ability Chart */}
-      <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700 mb-6">
-        <h3 className="text-xl font-bold text-blue-300 mb-6 text-center">能力六角圖</h3>
-        <div className="flex justify-center">
-          <svg width="400" height="400" viewBox="0 0 400 400" className="overflow-visible">
-            {/* 繪製背景網格 (10個層級) */}
-            {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((level) => {
-              const points = Array.from({ length: 6 }, (_, i) => {
-                const angle = (Math.PI / 3) * i - Math.PI / 2;
-                const radius = (level / 100) * 150;
-                const x = 200 + radius * Math.cos(angle);
-                const y = 200 + radius * Math.sin(angle);
-                return `${x},${y}`;
-              }).join(' ');
-              
-              return (
-                <polygon
-                  key={level}
-                  points={points}
-                  fill="none"
-                  stroke={level === 100 ? '#475569' : '#334155'}
-                  strokeWidth={level === 100 ? '2' : '1'}
-                  opacity={level === 100 ? '0.5' : '0.3'}
-                />
-              );
-            })}
-
-            {/* 繪製從中心到各頂點的線 */}
-            {abilityScores.map((item, i) => {
-              const angle = (Math.PI / 3) * i - Math.PI / 2;
-              const x = 200 + 150 * Math.cos(angle);
-              const y = 200 + 150 * Math.sin(angle);
-              return (
-                <line
-                  key={i}
-                  x1="200"
-                  y1="200"
-                  x2={x}
-                  y2={y}
-                  stroke="#334155"
-                  strokeWidth="1"
-                  opacity="0.3"
-                />
-              );
-            })}
-
-            {/* 繪製能力數據多邊形 */}
-            <polygon
-              points={abilityScores.map((item, i) => {
-                const angle = (Math.PI / 3) * i - Math.PI / 2;
-                const radius = (item.score / 100) * 150;
-                const x = 200 + radius * Math.cos(angle);
-                const y = 200 + radius * Math.sin(angle);
-                return `${x},${y}`;
-              }).join(' ')}
-              fill="rgba(59, 130, 246, 0.3)"
-              stroke="#3b82f6"
-              strokeWidth="2"
-            />
-
-            {/* 繪製數據點 */}
-            {abilityScores.map((item, i) => {
-              const angle = (Math.PI / 3) * i - Math.PI / 2;
-              const radius = (item.score / 100) * 150;
-              const x = 200 + radius * Math.cos(angle);
-              const y = 200 + radius * Math.sin(angle);
-              return (
-                <circle
-                  key={i}
-                  cx={x}
-                  cy={y}
-                  r="5"
-                  fill="#3b82f6"
-                  stroke="#fff"
-                  strokeWidth="2"
-                />
-              );
-            })}
-
-            {/* 標籤文字 */}
-            {abilityScores.map((item, i) => {
-              const angle = (Math.PI / 3) * i - Math.PI / 2;
-              const labelRadius = 175;
-              const x = 200 + labelRadius * Math.cos(angle);
-              const y = 200 + labelRadius * Math.sin(angle);
-              
-              return (
-                <g key={i}>
-                  <text
-                    x={x}
-                    y={y}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="fill-slate-200 font-semibold text-sm"
-                  >
-                    {item.ability}
-                  </text>
-                  <text
-                    x={x}
-                    y={y + 18}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="fill-blue-400 font-bold text-base"
-                  >
-                    {item.score.toFixed(1)}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
       </div>
 
       {/* Subjects Display */}
