@@ -5,43 +5,67 @@ export default function Profile() {
   return (
     <div>
       {/* Header with Avatar and Name */}
-      <div className="flex flex-col items-start gap-6 mb-8">
-        <div className="relative w-32 h-32">
+      <div className="flex flex-col items-center gap-6 mb-8">
+        <div className="relative w-40 h-40">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl blur-3xl opacity-30 animate-pulse" />
-          <div className="relative w-32 h-32 rounded-2xl overflow-hidden">
+          <div className="relative w-40 h-40 rounded-2xl overflow-hidden">
             <Image
               src="/images/avatar.png"
               alt="Profile Picture"
-              width={128}
-              height={128}
+              width={160}
+              height={160}
               className="object-cover"
               priority
             />
           </div>
         </div>
-        <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             謝子尉
           </h1>
           <p className="text-xl text-slate-300">MLOps Engineer & Backend Developer</p>
         </div>
       </div>
 
-      {/* Quick Facts */}
+      {/* Contact & Social */}
       <div className="bg-blue-950/20 backdrop-blur-xl p-8 rounded-lg border border-blue-500/30">
-        <h3 className="text-xl font-bold text-blue-300 mb-6">Quick Facts</h3>
-        <ul className="space-y-4">
-          <li className="text-slate-300">📍 Based in Taiwan</li>
-          <li className="text-slate-300">🌐 TOEIC: 830</li>
-          <li className="text-slate-300">💼 Active MLOps Enthusiast</li>
-        </ul>
+        <h3 className="text-lg font-semibold text-blue-300 mb-4">📬 Contact</h3>
+        
+        {/* Social Links */}
+        <div className="flex flex-col gap-4">
+          <a 
+            href="https://github.com/32844583?tab=repositories" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group"
+          >
+            <Github size={24} className="group-hover:scale-110 transition-transform" />
+            <span>github</span>
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/ziwei-shen-662bb7358/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group"
+          >
+            <Linkedin size={24} className="group-hover:scale-110 transition-transform" />
+            <span>linkedin</span>
+          </a>
+          <a 
+            href="mailto:youto201266@gmail.com"
+            className="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group"
+          >
+            <Mail size={24} className="group-hover:scale-110 transition-transform" />
+            <span>gmail</span>
+          </a>
+        </div>
 
         {/* Education Section */}
         <div className="mt-8 pt-6 border-t border-blue-500/20">
           <h4 className="text-lg font-semibold text-blue-300 mb-4">🎓 Education</h4>
           <div className="space-y-4">
             {/* Master's Degree */}
-            <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700">
+            <div>
               <p className="text-slate-200 font-semibold mb-1">M.S. Information Management</p>
               <p className="text-slate-400 text-sm mb-2">National Central University | 2024 - Present</p>
               <div className="flex gap-4 text-sm">
@@ -51,7 +75,7 @@ export default function Profile() {
             </div>
             
             {/* Bachelor's Degree */}
-            <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700">
+            <div>
               <p className="text-slate-200 font-semibold mb-1">B.S. Information Management</p>
               <p className="text-slate-400 text-sm mb-2">National Central University | 2021 - 2024</p>
               <div className="flex gap-4 text-sm">
@@ -60,32 +84,6 @@ export default function Profile() {
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Social Links */}
-        <div className="flex gap-6 mt-8 pt-6 border-t border-blue-500/20">
-          <a 
-            href="https://github.com/32844583?tab=repositories" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-blue-400 transition-colors"
-          >
-            <Github size={28} />
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/ziwei-shen-662bb7358/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-blue-400 transition-colors"
-          >
-            <Linkedin size={28} />
-          </a>
-          <a 
-            href="mailto:youto201266@gmail.com"
-            className="text-gray-400 hover:text-blue-400 transition-colors"
-          >
-            <Mail size={28} />
-          </a>
         </div>
       </div>
     </div>
