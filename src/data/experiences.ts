@@ -1,9 +1,19 @@
 import { Experience } from '@/types';
 
 export const experiences: Experience[] = [
+{
+    key: 'research',
+    title: '智慧金融分析實驗室',
+    subtitle: '計劃助理 | Sep 2024 - Now',
+    points: [
+      '比較不同時空卷積神經網路應用於股票預測的準確度作為基線模型',
+      '透過論文了解不同模型的運作原理，加深對實驗設計以及模型的認識'
+    ],
+    techs: ['PyTorch', 'TensorFlow', 'Python']
+  },
   {
     key: 'tsmc',
-    title: '台灣積體電路製造有限股份公司 智慧製造中心 基礎平台工程部',
+    title: '台灣積體電路製造有限股份公司 基礎平台工程部',
     subtitle: '暑期實習 | Jul 2025 - Sep 2025',
     points: [
       '開發 Teams Chatbot 以簡化日常維運流程，後端採用 Langchain Agent 驅動。',
@@ -11,16 +21,6 @@ export const experiences: Experience[] = [
       '此 Chatbot 應用預估能為工程師節省90%手動操作時間，顯著提升工作效率。'
     ],
     techs: ['FastAPI', 'Teams Bot', 'Langchain', 'Azure DevOps', 'k8s', 'ArgoCD']
-  },
-  {
-    key: 'research',
-    title: 'Intelligence Financial Analysis Lab',
-    subtitle: '計劃助理 | Sep 2024 - Jul 2025',
-    points: [
-      '比較不同時空卷積神經網路應用於股票預測的準確度作為基線模型',
-      '透過論文了解不同模型的運作原理，加深對實驗設計以及模型的認識'
-    ],
-    techs: ['PyTorch', 'TensorFlow', 'Python']
   },
   {
     key: 'itri',
