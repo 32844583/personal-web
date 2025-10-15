@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Profile() {
   return (
@@ -7,13 +8,20 @@ export default function Profile() {
       <div className="flex flex-col items-start gap-6 mb-8">
         <div className="relative w-32 h-32">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl blur-3xl opacity-30 animate-pulse" />
-          <div className="relative w-32 h-32 bg-gradient-to-br from-blue-900 to-cyan-900 rounded-2xl flex items-center justify-center text-5xl font-bold">
-            ML
+          <div className="relative w-32 h-32 rounded-2xl overflow-hidden">
+            <Image
+              src="/images/avatar.png"
+              alt="Profile Picture"
+              width={128}
+              height={128}
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
         <div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Zie-Wei
+            謝子尉
           </h1>
           <p className="text-xl text-slate-300">MLOps Engineer & Backend Developer</p>
         </div>
