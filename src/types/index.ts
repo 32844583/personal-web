@@ -22,7 +22,6 @@ export interface Experience {
   key: string;
   title: string;
   subtitle: string;
-  description: string;
   points: string[];
   techs: string[];
 }

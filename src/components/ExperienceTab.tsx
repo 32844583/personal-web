@@ -33,25 +33,25 @@ export default function ExperienceTab() {
             />
           </button>
           
-          {/* 移除條件判斷，讓所有內容都顯示 */}
-          <div className="p-6 border-t border-slate-700 text-slate-300">
-            <p className="mb-4">{exp.description}</p>
-            <ul className="mb-4 space-y-2">
-              {exp.points.map((point, idx) => (
-                <li key={idx} className="ml-6">• {point}</li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-2">
-              {exp.techs.map(tech => (
-                <span 
-                  key={tech} 
-                  className="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm border border-blue-800"
-                >
-                  {tech}
-                </span>
-              ))}
+          {expandedSection === exp.key && (
+            <div className="p-6 border-t border-slate-700 text-slate-300">
+              <ul className="mb-4 space-y-2">
+                {exp.points.map((point, idx) => (
+                  <li key={idx} className="ml-6">• {point}</li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                {exp.techs.map(tech => (
+                  <span 
+                    key={tech} 
+                    className="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm border border-blue-800"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       ))}
     </div>

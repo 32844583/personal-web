@@ -90,7 +90,7 @@ export const projects: Project[] = [
     id: 'advanced-rag',
     title: 'Enterprise Q&A System',
     description: '這份專案記錄了我探索檢索增強生成（Retrieval-Augmented Generation, RAG）技術的過程。專案從基礎的 Naive RAG 開始，逐步加入了能處理圖文資料的 Multimodal RAG，並嘗試透過 Graph RAG 來理解與查詢實體間的複雜關係，藉此了解不同 RAG 方法在問答系統中的效果。',
-    period: 'Jul 2023 - Sep 2023',
+    period: 'Feb 2025 - Jun 2025',
     type: 'public',
     github: 'https://github.com/32844583/NCU_1132_Course_FinancialManagement',
     screenshot: '/screenshots/advanced-rag.png',
