@@ -110,5 +110,30 @@ export const projects: Project[] = [
         solution: '設計並實作 Graph RAG。在資料處理階段，我們不僅將文件做切割與向量化，還額外進行了「實體與關係提取」。系統會自動識別出文件中的公司、人物等實體，以及它們之間的關係（如：供應、合作、投資），並將這些資訊存入一個知識圖譜。當使用者提問時，系統會先在圖譜中查詢相關的實體與路徑，再結合檢索到的文本，讓 LLM 能生成更貼近問題脈絡、更具參考價值的答案。'
       }
     ]
+  },
+  {
+    id: 'diary-linebot',
+    title: 'Diary Line Bot',
+    description: '這份專案記錄了我探索檢索增強生成（Retrieval-Augmented Generation, RAG）技術的過程。專案從基礎的 Naive RAG 開始，逐步加入了能處理圖文資料的 Multimodal RAG，並嘗試透過 Graph RAG 來理解與查詢實體間的複雜關係，藉此了解不同 RAG 方法在問答系統中的效果。',
+    period: 'Feb 2022 - Jun 2022',
+    type: 'public',
+    github: 'https://github.com/32844583/NCU_1112_Course_DiaryBot',
+    screenshot: '/screenshots/diary-linebot.png',
+    features: [
+      '使用者可以在 Line Bot 新增、修改、刪除日記。',
+      '新增、修改日記可以得到 ChatGPT 小天使的回覆。',
+      'AI 會分析日記蘊含的情緒並繪成圖表。'
+    ],
+    tech: ['Django', 'PostgreSQL', 'Nginx', 'Line Developer', 'Openai API', 'Matplotlib'],
+    challenges: [
+      {
+        challenge: '缺乏繁體中文的情感分析模型',
+        solution: '除了串接 Google 翻譯 API，也可以透過提示詞引導模型直接判斷分析情感。'
+      },
+      {
+        challenge: 'AI 回覆模式缺乏一致性',
+        solution: '透過精心設計固定的提示詞模板 (Prompt Template)，可以更有效地引導和約束大型語言模型的輸出，能讓 AI 小天使的回覆風格、語氣和內容結構都標準化，從而提供更優質、更穩定的使用者體驗。'
+      }
+    ]
   }
 ];
