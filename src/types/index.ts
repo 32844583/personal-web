@@ -37,3 +37,20 @@ export interface SkillCategory {
   title: string;
   tools: Tool[];
 }
+
+export interface SkillCategory {
+  title: string;
+  tools: Tool[];
+}
+
+export interface Subject {
+  name: string;
+  type: '必修' | '選修';
+  score: number;
+  grade: '大一' | '大二' | '大三' | '大四' | '碩一' | '碩二';
+}
+
+export interface SubjectCategory {
+  title: string;
+  subjects: Subject[];
+}

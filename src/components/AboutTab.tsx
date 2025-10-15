@@ -128,19 +128,21 @@ export default function AboutTab() {
 
   return (
     <div className="space-y-8">
-      {/* Bio Section - 增大文字並標示重點，添加打字動畫 */}
-      <div className="bg-slate-700/30 rounded-lg p-6 border border-slate-600">
+      {/* Bio Section - 帶有 Intro 標籤 */}
+      <div className="relative bg-slate-700/30 rounded-lg p-6 border border-slate-600">
+        <span className="absolute -top-3 left-4 bg-slate-800 px-3 py-1 text-sm font-semibold text-blue-300">
+          Intro
+        </span>
         <div className="text-slate-200 text-lg leading-relaxed">
           {getDisplayTextWithCursor()}
         </div>
       </div>
 
-      {/* 分隔線 */}
-      <div className="border-t-2 border-slate-600/50"></div>
-
-      {/* Skills Section Title */}
-      <div>
-        <h2 className="text-2xl font-bold text-blue-300 mb-6">Technical Skills</h2>
+      {/* Skills Section - 帶有 Skills 標籤 */}
+      <div className="relative bg-slate-700/30 rounded-lg p-6 border border-slate-600">
+        <span className="absolute -top-3 left-4 bg-slate-800 px-3 py-1 text-sm font-semibold text-blue-300">
+          Skills
+        </span>
         
         {/* Category Buttons - 添加 All 選項 */}
         <div className="flex flex-wrap gap-3 mb-6">
@@ -170,54 +172,49 @@ export default function AboutTab() {
         </div>
 
         {/* Tools Display - 調整間距和寬度 */}
-        <div className="bg-slate-700/30 rounded-lg p-6 border border-slate-600">
-          <h3 className="text-xl font-bold text-blue-300 mb-6">
-            {activeCategory === -1 ? 'All Skills' : skillCategories[activeCategory].title}
-          </h3>
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4">
-            {displayTools.map((tool) => {
-              const { level, bars } = getProficiencyLevel(tool.proficiency);
-              return (
-                <div key={tool.name} className="flex flex-col gap-2">
-                  {/* Tool Icon and Name */}
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-16 h-16 rounded-lg bg-slate-600 border-2 border-slate-500 flex items-center justify-center overflow-hidden p-2">
-                      {tool.icon ? (
-                        <img 
-                          src={tool.icon} 
-                          alt={tool.name}
-                          className="w-12 h-12 object-contain"
-                        />
-                      ) : (
-                        <span className="text-lg font-bold text-slate-300">
-                          {tool.name.substring(0, 3).toUpperCase()}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-slate-200 text-center font-medium">
-                      {tool.name}
-                    </p>
+        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4">
+          {displayTools.map((tool) => {
+            const { level, bars } = getProficiencyLevel(tool.proficiency);
+            return (
+              <div key={tool.name} className="flex flex-col gap-2">
+                {/* Tool Icon and Name */}
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-lg bg-slate-600 border-2 border-slate-500 flex items-center justify-center overflow-hidden p-2">
+                    {tool.icon ? (
+                      <img 
+                        src={tool.icon} 
+                        alt={tool.name}
+                        className="w-12 h-12 object-contain"
+                      />
+                    ) : (
+                      <span className="text-lg font-bold text-slate-300">
+                        {tool.name.substring(0, 3).toUpperCase()}
+                      </span>
+                    )}
                   </div>
+                  <p className="text-sm text-slate-200 text-center font-medium">
+                    {tool.name}
+                  </p>
+                </div>
 
-                  {/* Proficiency Bars - 改為3格式 */}
-                  <div className="w-full">
-                    <div className="flex gap-1 justify-center">
-                      {[1, 2, 3].map((bar) => (
-                        <div 
-                          key={bar}
-                          className={`w-5 h-1.5 rounded-full transition-all duration-300 ${
-                            bar <= bars 
-                              ? 'bg-blue-500' 
-                              : 'bg-slate-700'
-                          }`}
-                        />
-                      ))}
-                    </div>
+                {/* Proficiency Bars - 改為3格式 */}
+                <div className="w-full">
+                  <div className="flex gap-1 justify-center">
+                    {[1, 2, 3].map((bar) => (
+                      <div 
+                        key={bar}
+                        className={`w-5 h-1.5 rounded-full transition-all duration-300 ${
+                          bar <= bars 
+                            ? 'bg-blue-500' 
+                            : 'bg-slate-700'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

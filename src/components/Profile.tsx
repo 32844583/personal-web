@@ -57,7 +57,7 @@ export default function Profile() {
         {/* Social Links */}
         <div className="flex gap-6 mt-8 pt-6 border-t border-blue-500/20">
           <a 
-            href="https://github.com" 
+            href="https://github.com/32844583?tab=repositories" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -65,7 +65,7 @@ export default function Profile() {
             <Github size={28} />
           </a>
           <a 
-            href="https://linkedin.com" 
+            href="https://www.linkedin.com/in/ziwei-shen-662bb7358/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-400 transition-colors"

@@ -5,9 +5,10 @@ import About from '@/components/Profile';
 import ExperienceTab from '@/components/ExperienceTab';
 import AboutTab from '@/components/AboutTab';
 import ProjectsTab from '@/components/ProjectsTab';
+import SubjectTab from '@/components/SubjectTab';
 import Footer from '@/components/Footer';
 
-type TabType = 'experience' | 'skills' | 'projects';
+type TabType = 'experience' | 'skills' | 'projects' | 'subjects';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('skills');
@@ -15,7 +16,8 @@ export default function Home() {
   const tabs: { key: TabType; label: string }[] = [
     { key: 'skills', label: 'About' },
     { key: 'experience', label: 'Experience' },
-    { key: 'projects', label: 'Projects' }
+    { key: 'projects', label: 'Projects' },
+    { key: 'subjects', label: 'Subjects' }
   ];
 
   return (
@@ -51,6 +53,7 @@ export default function Home() {
               {activeTab === 'experience' && <ExperienceTab />}
               {activeTab === 'skills' && <AboutTab />}
               {activeTab === 'projects' && <ProjectsTab />}
+              {activeTab === 'subjects' && <SubjectTab />}
             </div>
           </div>
         </div>
