@@ -24,15 +24,34 @@ export default function SubjectTab() {
     }
   });
 
-  // 計算成績填滿的格數 (0-20, 20-40, 40-60, 60-80, 80-100)
+  // 計算成績填滿的格數 (0-10, 10-20, 20-30, ... 90-100)
   const getFilledBars = (score: number) => {
-    if (score >= 80) return 5;
-    if (score >= 60) return 4;
-    if (score >= 40) return 3;
-    if (score >= 20) return 2;
-    if (score > 0) return 1;
-    return 0;
+    return Math.floor(score / 10);
   };
+
+  // 計算各領域的平均分數
+  const calculateAbilityScores = () => {
+    const abilities = {
+      '資料庫設計': ['資料庫管理'],
+      '人工智慧': ['機器學習概論', '人工智慧與機器學習', 'AI人工智慧導論', '自然語言處理', '圖像辨識的企業應用', '資料科學與機器學習'],
+      '系統設計': ['系統分析與設計', '軟體工程I', '網頁設計', '資訊系統發展專題I', '資訊系統發展專題II'],
+      '邏輯能力': ['資料與檔案結構', '演算法', '程式設計概念與方法(C)', '程式設計(Java)', '程式設計(JavaScript)', 'Java程式設計進階', '程式設計-Python'],
+      '作業系統': ['作業系統(Unix)', '作業系統操作與管理(Linux)', 'Linux與邊緣運算'],
+      '資安網路': ['企業資料通訊', '進階區塊鏈應用與隱私防護']
+    };
+
+    const allSubjects = subjectCategories.flatMap(cat => cat.subjects);
+    
+    return Object.entries(abilities).map(([ability, subjectNames]) => {
+      const relatedSubjects = allSubjects.filter(s => subjectNames.includes(s.name));
+      const avgScore = relatedSubjects.length > 0
+        ? relatedSubjects.reduce((sum, s) => sum + s.score, 0) / relatedSubjects.length
+        : 0;
+      return { ability, score: avgScore };
+    });
+  };
+
+  const abilityScores = calculateAbilityScores();
 
   const toggleSort = () => {
     setSortBy(prev => prev === 'grade' ? 'score' : 'grade');
@@ -69,6 +88,119 @@ export default function SubjectTab() {
         </button>
       </div>
 
+      {/* Hexagon Ability Chart */}
+      <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700 mb-6">
+        <h3 className="text-xl font-bold text-blue-300 mb-6 text-center">能力六角圖</h3>
+        <div className="flex justify-center">
+          <svg width="400" height="400" viewBox="0 0 400 400" className="overflow-visible">
+            {/* 繪製背景網格 (10個層級) */}
+            {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((level) => {
+              const points = Array.from({ length: 6 }, (_, i) => {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const radius = (level / 100) * 150;
+                const x = 200 + radius * Math.cos(angle);
+                const y = 200 + radius * Math.sin(angle);
+                return `${x},${y}`;
+              }).join(' ');
+              
+              return (
+                <polygon
+                  key={level}
+                  points={points}
+                  fill="none"
+                  stroke={level === 100 ? '#475569' : '#334155'}
+                  strokeWidth={level === 100 ? '2' : '1'}
+                  opacity={level === 100 ? '0.5' : '0.3'}
+                />
+              );
+            })}
+
+            {/* 繪製從中心到各頂點的線 */}
+            {abilityScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const x = 200 + 150 * Math.cos(angle);
+              const y = 200 + 150 * Math.sin(angle);
+              return (
+                <line
+                  key={i}
+                  x1="200"
+                  y1="200"
+                  x2={x}
+                  y2={y}
+                  stroke="#334155"
+                  strokeWidth="1"
+                  opacity="0.3"
+                />
+              );
+            })}
+
+            {/* 繪製能力數據多邊形 */}
+            <polygon
+              points={abilityScores.map((item, i) => {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const radius = (item.score / 100) * 150;
+                const x = 200 + radius * Math.cos(angle);
+                const y = 200 + radius * Math.sin(angle);
+                return `${x},${y}`;
+              }).join(' ')}
+              fill="rgba(59, 130, 246, 0.3)"
+              stroke="#3b82f6"
+              strokeWidth="2"
+            />
+
+            {/* 繪製數據點 */}
+            {abilityScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const radius = (item.score / 100) * 150;
+              const x = 200 + radius * Math.cos(angle);
+              const y = 200 + radius * Math.sin(angle);
+              return (
+                <circle
+                  key={i}
+                  cx={x}
+                  cy={y}
+                  r="5"
+                  fill="#3b82f6"
+                  stroke="#fff"
+                  strokeWidth="2"
+                />
+              );
+            })}
+
+            {/* 標籤文字 */}
+            {abilityScores.map((item, i) => {
+              const angle = (Math.PI / 3) * i - Math.PI / 2;
+              const labelRadius = 175;
+              const x = 200 + labelRadius * Math.cos(angle);
+              const y = 200 + labelRadius * Math.sin(angle);
+              
+              return (
+                <g key={i}>
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-slate-200 font-semibold text-sm"
+                  >
+                    {item.ability}
+                  </text>
+                  <text
+                    x={x}
+                    y={y + 18}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-blue-400 font-bold text-base"
+                  >
+                    {item.score.toFixed(1)}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </div>
+
       {/* Subjects Display */}
       <div className="space-y-4">
         {sortedSubjects.map((subject) => {
@@ -96,9 +228,9 @@ export default function SubjectTab() {
 
               {/* Score Bar and Number */}
               <div className="flex items-center gap-4">
-                {/* Progress Bar */}
+                {/* Progress Bar - 改為10格 */}
                 <div className="flex-1 flex gap-1">
-                  {[1, 2, 3, 4, 5].map((bar) => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((bar) => (
                     <div 
                       key={bar}
                       className={`flex-1 h-3 rounded-sm transition-all duration-300 ${
