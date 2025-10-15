@@ -2,12 +2,6 @@ import { Subject, SubjectCategory } from '@/types';
 
 export const subjectCategories: SubjectCategory[] = [
   {
-    title: '資料庫設計',
-    subjects: [
-      { name: '資料庫管理', type: '必修', score: 98, grade: '大一' },
-    ]
-  },
-  {
     title: '人工智慧',
     subjects: [
       { name: '機器學習概論', type: '選修', score: 100, grade: '大二' },
@@ -38,6 +32,12 @@ export const subjectCategories: SubjectCategory[] = [
       { name: 'Java程式設計進階', type: '選修', score: 93, grade: '大四' },
       { name: '資料與檔案結構', type: '必修', score: 85, grade: '大二' },
       { name: '演算法', type: '必修', score: 88, grade: '大四' },
+    ]
+  },
+  {
+    title: '資料庫設計',
+    subjects: [
+      { name: '資料庫管理', type: '必修', score: 98, grade: '大一' },
     ]
   },
   {
