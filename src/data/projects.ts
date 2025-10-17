@@ -25,26 +25,25 @@ export const projects: Project[] = [
       }
     ]
   },
-  // {
-  //   id: 'fin-stgcn',
-  //   title: 'Financial STGCN',
-  //   description: '本研究旨在探討不同時空卷積神經網路（Spatio-Temporal Graph Convolutional Networks, STGCN）在股票價格預測上的應用與準確度。研究核心在於利用股票的歷史價格資料來訓練與評估多個基線模型。為了提升預測效能，本專案不僅比較了現有模型的表現，更進一步針對金融領域的特性進行改良，引入注意力機制與量化指標來定義公司間的關聯性，成功驗證了結合產業知識圖譜的先進模型能有效提升預測的準確度。',
-  //   period: 'Sep 2024 - Jul 2025',
-  //   type: 'private',
-  //   screenshot: '/screenshots/fin-stgcn.png',
-  //   features: [
-  //     '系統性地研究並比較了多種時空卷積神經網路模型在股票預測領域的表現。',
-  //     '引入注意力機制（Attention Mechanism），讓模型能動態學習不同時間點下，公司之間影響力的強弱。',
-  //     'ASTGCN 模型在整合上下游知識圖譜後，於四項關鍵評估指標上全面超越其他基線模型'
-  //   ],
-  //   tech: ['PyTorch', 'TensorFlow', 'Python', 'NumPy', 'Pandas'],
-  //   challenges: [
-  //     {
-  //       challenge: '金融知識圖譜的量化困難',
-  //       solution: '引入注意力機制 (Attention Mechanism)動態地學習在不同時間點，上下游公司之間相互影響的關係強度。採用了股票技術面的相似度作為圖譜中的邊權重 (edge weights)'
-  //     }
-  //   ]
-  // },
+  {
+  id: 'fin-stgcn',
+  title: 'Financial STGCN',
+  description: '本研究旨在探討不同時空卷積神經網路（Spatio-Temporal Graph Convolutional Networks, STGCN）在股票價格預測上的應用與準確度。研究核心在於利用股票的歷史價格資料來訓練與評估多個基線模型。為了提升預測效能，本專案不僅比較了現有模型的表現，更進一步針對金融領域的特性進行改良，引入注意力機制與量化指標來定義公司間的關聯性，成功驗證了結合產業知識圖譜的先進模型能有效提升預測的準確度。',
+  period: 'Sep 2024 - Jul 2025',
+  type: 'private',
+  screenshot: '/screenshots/fin-stgcn.png',
+  features: [
+  '系統性地研究並比較了多種時空卷積神經網路模型在股票預測領域的表現。',
+  '引入由不同面相組成的股票關係網絡，讓模型能動態學習不同公司之間影響力的強弱。',
+  ],
+  tech: ['PyTorch', 'TensorFlow', 'Python', 'NumPy', 'Pandas'],
+  challenges: [
+    {
+      challenge: '金融知識圖譜的量化困難',
+      solution: '引入注意力機制 (Attention Mechanism)動態地學習在不同時間點，上下游公司之間相互影響的關係強度。採用了股票技術面的相似度作為圖譜中的邊權重 (edge weights)'
+    }
+  ]
+  },
   {
     id: 'stockmate',
     title: 'Stockmate',
