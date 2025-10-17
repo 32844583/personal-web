@@ -17,6 +17,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'TensorFlow', icon: '/icons/tensorflow.svg', proficiency: 60 },
       { name: 'Scikit-learn', icon: '/icons/sklearn.png', proficiency: 90 },
       { name: 'Langchain', icon: '/icons/langchain.png', proficiency: 90 },
+      { name: 'neo4j', icon: '/icons/neo4j.png', proficiency: 30 }
       { name: 'NumPy', icon: '/icons/numpy.svg', proficiency: 90 },
       { name: 'Pandas', icon: '/icons/pandas.svg', proficiency: 90 }
     ]
@@ -38,7 +39,8 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Kubernetes', icon: '/icons/kubernetes.svg', proficiency: 90 },
       { name: 'Git', icon: '/icons/git.svg', proficiency: 90 },
       { name: 'ArgoCD', icon: '/icons/argocd.png', proficiency: 30 },
-      { name: 'Harbor', icon: '/icons/harbor.svg', proficiency: 30 }
+      { name: 'Harbor', icon: '/icons/harbor.svg', proficiency: 30 },
+      { name: 'nginx', icon: '/icons/harbor.svg', proficiency: 30 }
     ]
   },
   {

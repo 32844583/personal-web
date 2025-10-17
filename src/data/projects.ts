@@ -98,7 +98,7 @@ export const projects: Project[] = [
       '支援處理包含圖文的財報，能從表格圖片中準確提取關鍵財務數據並進行問答。',
       '自動從文本中提取公司實體與其關係並建構知識圖譜，實現對供應鏈、合作夥伴等複雜關聯的深度查詢。'
     ],
-    tech: ['LlamaIndex', 'FAISS', 'LangChain', 'Gemini', 'GPT', 'Vector Database', 'Knowledge Graph'],
+    tech: ['LlamaIndex', 'FAISS', 'LangChain', 'Embedding', 'RAGAS', 'Neo4j'],
     challenges: [
       {
         challenge: '如何處理財報中的表格圖片資訊？',
