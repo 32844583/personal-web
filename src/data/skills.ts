@@ -17,7 +17,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'TensorFlow', icon: '/icons/tensorflow.svg', proficiency: 60 },
       { name: 'Scikit-learn', icon: '/icons/sklearn.png', proficiency: 90 },
       { name: 'Langchain', icon: '/icons/langchain.png', proficiency: 90 },
-      { name: 'neo4j', icon: '/icons/neo4j.png', proficiency: 30 }
+      { name: 'neo4j', icon: '/icons/neo4j.png', proficiency: 30 },
       { name: 'NumPy', icon: '/icons/numpy.svg', proficiency: 90 },
       { name: 'Pandas', icon: '/icons/pandas.svg', proficiency: 90 }
     ]
