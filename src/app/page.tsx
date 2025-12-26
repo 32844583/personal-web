@@ -2,21 +2,19 @@
 
 import { useState } from 'react';
 import About from '@/components/Profile';
-import ExperienceTab from '@/components/ExperienceTab';
+import WorksTab from '@/components/WorksTab';
 import AboutTab from '@/components/AboutTab';
-import ProjectsTab from '@/components/ProjectsTab';
 import SubjectTab from '@/components/SubjectTab';
 import Footer from '@/components/Footer';
 
-type TabType = 'experience' | 'skills' | 'projects' | 'subjects';
+type TabType = 'about' | 'works' | 'subjects';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabType>('skills');
+  const [activeTab, setActiveTab] = useState<TabType>('about');
 
   const tabs: { key: TabType; label: string }[] = [
-    { key: 'skills', label: 'About' },
-    { key: 'experience', label: 'Experience' },
-    { key: 'projects', label: 'Projects' },
+    { key: 'about', label: 'About' },
+    { key: 'works', label: 'Works' },
     { key: 'subjects', label: 'Subjects' }
   ];
 
@@ -31,17 +29,16 @@ export default function Home() {
 
           {/* Right Side - Tabs and Content */}
           <div className="flex flex-col">
-            {/* Tabs - 增大按鈕尺寸和間距 */}
-            <div className="flex flex-wrap gap-6 mb-8">
+            {/* Tabs */}
+            <div className="flex flex-wrap gap-4 md:gap-6 mb-8">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`px-8 py-4 rounded-lg text-base font-semibold transition-all ${
-                    activeTab === tab.key
+                  className={`px-6 py-3 md:px-8 md:py-4 rounded-lg text-sm md:text-base font-semibold transition-all ${activeTab === tab.key
                       ? 'bg-blue-600 text-white shadow-lg'
                       : 'bg-slate-800 text-white hover:bg-slate-700'
-                  }`}
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -49,10 +46,9 @@ export default function Home() {
             </div>
 
             {/* Content Area */}
-            <div className="bg-slate-800/50 backdrop-blur-xl p-8 rounded-lg border border-slate-700 flex-1">
-              {activeTab === 'experience' && <ExperienceTab />}
-              {activeTab === 'skills' && <AboutTab />}
-              {activeTab === 'projects' && <ProjectsTab />}
+            <div className="bg-slate-800/50 backdrop-blur-xl p-6 md:p-8 rounded-lg border border-slate-700 flex-1">
+              {activeTab === 'about' && <AboutTab />}
+              {activeTab === 'works' && <WorksTab />}
               {activeTab === 'subjects' && <SubjectTab />}
             </div>
           </div>
