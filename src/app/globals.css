@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+/* ← 加這行 */
 
 :root {
   --background: #ffffff;
@@ -27,10 +29,14 @@ body {
 
 /* 自定義游標閃爍動畫 - 黑白交替 */
 @keyframes blink {
-  0%, 49% {
+
+  0%,
+  49% {
     background-color: #ffffff;
   }
-  50%, 100% {
+
+  50%,
+  100% {
     background-color: #000000;
   }
 }
