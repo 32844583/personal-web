@@ -5,9 +5,11 @@ import About from '@/components/Profile';
 import WorksTab from '@/components/WorksTab';
 import AboutTab from '@/components/AboutTab';
 import SubjectTab from '@/components/SubjectTab';
+import ResearchTab from '@/components/ResearchTab';
+import BlogTab from '@/components/BlogTab';
 import Footer from '@/components/Footer';
 
-type TabType = 'about' | 'works' | 'subjects';
+type TabType = 'about' | 'works' | 'research' | 'blog' | 'subjects';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('about');
@@ -15,6 +17,8 @@ export default function Home() {
   const tabs: { key: TabType; label: string }[] = [
     { key: 'about', label: 'About' },
     { key: 'works', label: 'Works' },
+    { key: 'research', label: 'Research' },
+    { key: 'blog', label: 'Blog' },
     { key: 'subjects', label: 'Subjects' }
   ];
 
@@ -49,6 +53,8 @@ export default function Home() {
             <div className="bg-slate-800/50 backdrop-blur-xl p-6 md:p-8 rounded-lg border border-slate-700 flex-1">
               {activeTab === 'about' && <AboutTab />}
               {activeTab === 'works' && <WorksTab />}
+              {activeTab === 'research' && <ResearchTab />}
+              {activeTab === 'blog' && <BlogTab />}
               {activeTab === 'subjects' && <SubjectTab />}
             </div>
           </div>

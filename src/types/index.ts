@@ -15,6 +15,7 @@ export interface WorkItem {
   period: string;          // 時間區間
 
   // 分類
+  category: 'internship' | 'course';
   type: 'public' | 'private';
 
   // 內容
@@ -32,27 +33,41 @@ export interface WorkItem {
   externalLink?: string;
 }
 
-// 保留舊的類型以防其他地方使用
-export interface Project {
+// Research 相關類型
+export interface ResearchSection {
   id: string;
   title: string;
-  description: string;
-  period: string;
-  type: 'public' | 'private';
-  github?: string;
-  screenshot?: string;
-  features: string[];
-  tech: string[];
-  challenges: Challenge[];
+  content: string;  // 直接寫內容
 }
 
-export interface Experience {
-  key: string;
+export interface Research {
   title: string;
-  subtitle: string;
-  points: string[];
-  techs: string[];
+  author: string;
+  advisor: string;
+  department: string;
+  date: string;
+  sections: ResearchSection[];
 }
+
+// Blog 相關類型
+export interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  tags: string[];
+  file: string;  // markdown 檔案路徑
+}
+
+// Blog 文章索引（不含 content）
+export interface PostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  tags: string[];
+}
+
 
 export interface Tool {
   name: string;
