@@ -3,18 +3,29 @@
 import { useState } from 'react';
 import { Calendar, Tag, ArrowRight } from 'lucide-react';
 import { posts } from '@/data/posts';
-import Link from 'next/link';
+import { Post } from '@/types';
+import BlogPostView from './BlogPostView';
 
 type SortOrder = 'newest' | 'oldest';
 
 export default function BlogTab() {
     const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
+    const [selectedPost, setSelectedPost] = useState<Post | null>(null);  // 新增
 
-    // 取得所有 tags
+    // 如果有選中的文章，顯示文章內容
+    if (selectedPost) {
+        return (
+            <BlogPostView
+                post={selectedPost}
+                onBack={() => setSelectedPost(null)}
+            />
+        );
+    }
+
+    // 以下是原本的文章列表邏輯...
     const allTags = Array.from(new Set(posts.flatMap(post => post.tags)));
 
-    // 篩選並排序文章
     const filteredPosts = posts
         .filter(post => !selectedTag || post.tags.includes(selectedTag))
         .sort((a, b) => {
@@ -43,8 +54,8 @@ export default function BlogTab() {
                     <button
                         onClick={() => setSelectedTag(null)}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${!selectedTag
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                             }`}
                     >
                         All
@@ -54,8 +65,8 @@ export default function BlogTab() {
                             key={tag}
                             onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
                             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedTag === tag
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                                 }`}
                         >
                             {tag}
@@ -72,14 +83,13 @@ export default function BlogTab() {
                     {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
                 </button>
             </div>
-
             {/* Posts List */}
             <div className="space-y-4">
                 {filteredPosts.map((post) => (
-                    <Link
+                    <button
                         key={post.slug}
-                        href={`/blog/${post.slug}`}
-                        className="block bg-slate-800 rounded-lg border border-slate-700 p-6 hover:border-blue-500 transition-all group"
+                        onClick={() => setSelectedPost(post)}  // 改這裡
+                        className="block w-full text-left bg-slate-800 rounded-lg border border-slate-700 p-6 hover:border-blue-500 transition-all group"
                     >
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div className="flex-1">
@@ -110,7 +120,7 @@ export default function BlogTab() {
                                 <ArrowRight size={16} className="ml-1" />
                             </div>
                         </div>
-                    </Link>
+                    </button>
                 ))}
             </div>
 
