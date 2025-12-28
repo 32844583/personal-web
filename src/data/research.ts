@@ -1,111 +1,64 @@
 import { Research } from '@/types';
 
 export const research: Research = {
-    title: '您的碩士論文標題',
-    author: '謝子尉',
-    advisor: '指導教授姓名',
-    department: '國立中央大學 資訊工程學系',
-    date: '2025 年 7 月',
-    sections: [
-        {
-            id: 'abstract',
-            title: '摘要',
-            content: `
-請在此填寫您的論文摘要...
+  title: '動態因果網絡於股票報酬預測之建構與應用',
+  author: '謝子尉',
+  advisor: '邱信瑜',
+  department: '國立中央大學 資訊工程學系',
+  date: '2025 年 12 月',
+  sections: [
+    {
+      id: 'abstract',
+      title: '摘要(暫定)',
+      content: `
 
-本研究旨在探討...
 
-**關鍵字**：關鍵字1、關鍵字2、關鍵字3
+**關鍵字**：(暫定)
       `.trim()
-        },
-        {
-            id: 'motivation',
-            title: '研究動機',
-            content: `
+    },
+    {
+      id: 'motivation',
+      title: '研究動機(暫定)',
+      content: `
 ### 研究背景
+傳統的股票圖結構多侷限於同行業或上下游關係，且基於行業或股權等靜態屬性建構，無法捕捉股票報酬間的時序傳導效應，可能僅反映同期相關性而非因果聯繫。
 
-請在此描述研究背景...
 
-### 問題陳述
-
-請在此描述要解決的問題...
-
-### 研究目標
-
-請在此描述研究目標...
       `.trim()
-        },
-        {
-            id: 'literature',
-            title: '文獻回顧',
-            content: `
+    },
+    {
+      id: 'literature',
+      title: '文獻回顧(暫定)',
+      content: `
 ### 相關研究
 
-請在此回顧相關研究...
+Xiang, S., Cheng, D., Shang, C., Zhang, Y., & Liang, Y. (2022). Temporal and Heterogeneous Graph Neural Network for Financial Time Series Prediction. *Proceedings of the 31st ACM International Conference on Information and Knowledge Management (CIKM'22)*
 
-### 技術背景
+Kim, R., So, C. H., Jeong, M., Lee, S., Kim, J., & Kang, J. (2019). HATS: A Hierarchical Graph Attention Network for Stock Movement Prediction. *arXiv preprint arXiv:1908.07999*.
 
-請在此描述技術背景...
+Feng, F., He, X., Wang, X., Luo, C., Liu, Y., & Chua, T. S. (2019). Temporal Relational Ranking for Stock Prediction. *ACM Transactions on Information Systems (TOIS)*, 37(2), 1-30. 
 
-### 現有方法的限制
 
-請在此描述現有方法的限制...
       `.trim()
-        },
-        {
-            id: 'model',
-            title: '研究方法與模型',
-            content: `
-### 系統架構
-
-請在此描述系統架構...
-
-### 模型設計
-
-請在此描述模型設計...
-
+    },
+    {
+      id: 'model',
+      title: '研究方法與模型(暫定)',
+      content: `
 ### 實作細節
+運用統計因果分析方法，結合市場風險因子識別股票間的先後影響關係，以此結果作為圖神經網絡的輸入，並與其他替代結構進行預測與交易績效比較。
 
-請在此描述實作細節...
       `.trim()
-        },
-        {
-            id: 'results',
-            title: '結果分析',
-            content: `
-### 實驗設置
-
-請在此描述實驗設置...
-
-### 評估指標
-
-請在此描述評估指標...
-
-### 實驗結果
-
-請在此描述實驗結果...
-
-### 討論
-
-請在此進行討論...
+    },
+    {
+      id: 'results',
+      title: '結果分析',
+      content: `
+### 預期成果
+* 分析高出度與高入度股票的特性，檢視後者是否具較高可預測性
+* 比較因果圖與其他圖結構在預測準確率及策略績效上的表現
+* 檢驗牛熊市期間圖結構密度與連接數的差異
       `.trim()
-        },
-        {
-            id: 'conclusion',
-            title: '結論',
-            content: `
-### 研究貢獻
-
-請在此描述研究貢獻...
-
-### 研究限制
-
-請在此描述研究限制...
-
-### 未來展望
-
-請在此描述未來展望...
-      `.trim()
-        }
-    ]
+    }
+  ]
 };

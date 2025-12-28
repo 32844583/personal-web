@@ -9,7 +9,8 @@ import ResearchTab from '@/components/ResearchTab';
 import BlogTab from '@/components/BlogTab';
 import Footer from '@/components/Footer';
 
-type TabType = 'about' | 'works' | 'research' | 'blog' | 'subjects';
+type TabType = 'about' | 'works' | 'research' | 'subjects';
+// type TabType = 'about' | 'works' | 'research' | 'blog' | 'subjects';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('about');
@@ -18,7 +19,7 @@ export default function Home() {
     { key: 'about', label: 'About' },
     { key: 'works', label: 'Works' },
     { key: 'research', label: 'Research' },
-    { key: 'blog', label: 'Blog' },
+    // { key: 'blog', label: 'Blog' },
     { key: 'subjects', label: 'Subjects' }
   ];
 
@@ -40,8 +41,8 @@ export default function Home() {
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
                   className={`px-6 py-3 md:px-8 md:py-4 rounded-lg text-sm md:text-base font-semibold transition-all ${activeTab === tab.key
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-slate-800 text-white hover:bg-slate-700'
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'bg-slate-800 text-white hover:bg-slate-700'
                     }`}
                 >
                   {tab.label}

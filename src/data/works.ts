@@ -9,13 +9,13 @@ export const works: WorkItem[] = [
         period: 'Jul 2025 - Sep 2025',
         category: 'internship',
         type: 'private',
-        summary: '開發 Teams Chatbot 簡化日常維運流程，預估節省 90% 手動操作時間',
+        summary: '開發 Teams Chatbot 簡化日常維運流程，預估節省 60% 手動操作案例的時間',
         description: '在使用者提出問題後，由 Agent 調用 Tool 來調用各廠 Kibana、Prometheus、Database 的資訊，幫助工程師節省資料庫配置與流量盤點的時間，並透過 Azure DevOps 部署到各廠以分流。',
         highlights: [
             '開發 Teams Chatbot 以簡化日常維運流程，後端採用 Langchain Agent 驅動',
             '串接 Kibana、Prometheus 及資料庫作為 Agent 的工具',
             '透過 Azure DevOps 部署至各廠分流',
-            '此 Chatbot 應用預估能為工程師節省 90% 手動操作時間，顯著提升工作效率'
+            '此 Chatbot 應用預估能為工程師節省 60% 手動操作案例的時間，顯著提升工作效率'
         ],
         tech: ['FastAPI', 'Langchain', 'Teams Bot', 'Kibana', 'Prometheus', 'k8s', 'ArgoCD', 'Azure DevOps', 'Harbor'],
         challenges: [
