@@ -154,7 +154,7 @@ with torch.no_grad():  # 不計算梯度
 ### 定義超圖（Hypergraph）
 作為超圖的基礎連接單位超邊（hyperedge），可以同時連接任意數量的節點，論文依據 GICS（全球行業分類標準）來定義產業超邊，所有屬於同一產業的股票會被一條超邊連接起來，以下圖的醫療行業為例，就包括股票 Vertex、Moderna、Regeneron，這些被同一超邊連接的股票會**呈現同步的價格趨勢**，如之前提到的 COVID 案例。
 
-![image](https://hackmd.io/_uploads/S1lrprBNZe.png)
+![image](/posts/stock-selection-hypergraph/hypergraph-structure.png)
 
 而這個超邊被定義在關聯矩陣，如(公式4):
 $$h(v, e) = \begin{cases} 1, & v \in e \\ 0, & v \notin e \end{cases}$$
@@ -211,7 +211,7 @@ $$\mathbf{X}^{(l+1)} = \bigoplus_{k=1}^{K} \text{ELU}\left(\mathbf{D}_v^{-\frac{
 - $\bigoplus$：多頭結果合併操作（concat 或平均）
 - $\text{ELU}$：非線性激活函數
 
-![image](https://hackmd.io/_uploads/r1HXdWBNWe.png)
+![image](/posts/stock-selection-hypergraph/hypergraph-conv.png)
 節點更新分成三個階段:
 **第一階段：節點 → 超邊**
 
@@ -352,16 +352,16 @@ class HypergraphConv(MessagePassing):
 # 研究結果
 ### Hawkes 注意力視覺化分析
 Hawkes 注意力能準確捕捉**近期的趨勢變化**（窗口末端的上漲），而一般時間注意力 Temporal Attention 權重分散，反映整體趨勢但錯失近期轉折，在預測成效，Hawkes 預測更接近實際值。
-![image](https://hackmd.io/_uploads/rJjnoeB4Wg.png)
+![image](/posts/stock-selection-hypergraph/hawkes-attention.png)
 
 ### Hawkes 注意力視覺化分析
 在三個市場（NASDAQ、NYSE、東京證交所）超過六年的數據測試中，STHAN-SR 在所有評估指標上都顯著優於基準方法（p < 0.01）。
-![image](https://hackmd.io/_uploads/HyDVmuSNWx.png)
+![image](/posts/stock-selection-hypergraph/performance-results.png)
 
 ### 超圖優於普通圖
 實驗按照度數由小到大依序移除超圖邊，排名能力明顯下降，而當超圖邊被分解為成對關係時，排名能力也明顯下降。
-![image](https://hackmd.io/_uploads/SJyomOBN-x.png)
+![image](/posts/stock-selection-hypergraph/hypergraph-vs-graph.png)
 
 ### 各模組相輔相成
 消融實驗顯示，時序（Hawkes 注意力）和空間（超圖卷積 + 注意力）模組的結合，比單獨使用任一模組都能更好地捕捉股市中的時空相關性。
-![image](https://hackmd.io/_uploads/S1o2EOH4-e.png)
+![image](/posts/stock-selection-hypergraph/ablation-study.png)
