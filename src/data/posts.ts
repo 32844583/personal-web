@@ -10,8 +10,8 @@ export const posts: Post[] = [
     //     file: '/posts/graph-neural-network/index.md'
     // },
     {
-        slug: '論文 Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
-        title: '論文 Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
+        slug: '[Paper][Code] Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
+        title: '[Paper][Code] Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
         date: '2025-01-05',
         summary: '使用超圖卷積將行業維度應用於股票關聯預測',
         tags: ['STHAN-SR', 'Industry', 'Time step attention', 'Relationship attention'],
