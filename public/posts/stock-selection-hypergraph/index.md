@@ -1,11 +1,16 @@
 # 論文資訊
 作者: Ramit Sawhney, Shivam Agarwal, Arnav Wadhwa, Tyler Derr, and Rajiv Ratn Shah
+
 發表日期: 2021年5月18日
+
 會議/期刊: Proceedings of the AAAI Conference on Artificial Intelligence (AAAI 2021), Volume 35, Number 1, pages 497-504
+
 引用數量: 65次
+
 DOI: 10.1609/aaai.v35i1.16127
-論文原文: [論文原文](https://ojs.aaai.org/index.php/AAAI/article/view/16127)
-論文程式碼: [論文程式碼](https://github.com/NDS-VU/STHAN-SR-AAAI21)
+
+Link: [論文原文](https://ojs.aaai.org/index.php/AAAI/article/view/16127)、[論文程式碼](https://github.com/NDS-VU/STHAN-SR-AAAI21)
+
 
 # 研究動機
 在金融市場，股票存在群體關係（同產業的股票、同一位CEO管理的公司、母子公司關係），例如在COVID-19期間，旅遊業股票集體下跌，而醫療保健類股票集體上漲，但大多數方法將每支股票視為獨立個體，即使有考慮關聯性，也僅使用簡單的成對關係圖結構，**將這種集體關係拆解成多條兩兩之間的邊(節點-節點)**，例如10家公司都屬於醫療產業，就會產生 45(C10取2) 條邊，無法直接表達這10家公司屬於同一個群體，而**超圖則能用單一條超邊將這10家公司連結在一起(節點-超邊)**，可以直接表達這些公司同屬醫療產業的群體關係，**在進行超圖卷積時，同一超邊內的所有股票特徵會先聚合成超邊特徵，再傳遞回各節點，使得群體內的資訊能夠完整保留並有效傳播**。
