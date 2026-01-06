@@ -13,9 +13,9 @@ export const posts: Post[] = [
         slug: 'understanding-rag',
         title: '深入理解 RAG：檢索增強生成技術',
         date: '2025-01-10',
-        summary: '探討 RAG 的核心概念、架構設計，以及在實務專案中的應用經驗。',
-        tags: ['AI', 'RAG', 'LLM', 'NLP'],
-        file: '/posts/understanding-rag.md'
+        summary: 'Graph Neural Network 的起源與原理',
+        tags: ['GNN'],
+        file: '/posts/graph-neural-network/index.md'
     },
     {
         slug: 'python-async-programming',
@@ -29,8 +29,8 @@ export const posts: Post[] = [
         slug: 'Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
         title: 'Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
         date: '2025-01-05',
-        summary: '從 callback 到 async/await，理解 Python 非同步程式設計的演進。',
-        tags: ['Python', 'Async', 'Backend'],
+        summary: '使用超圖卷積將行業維度應用於股票關聯預測',
+        tags: ['STHAN-SR'],
         file: '/posts/stock-selection-hypergraph/index.md'
     }
 ];
