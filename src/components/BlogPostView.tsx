@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Post } from '@/types';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 interface Props {
     post: Post;
@@ -49,7 +52,12 @@ export default function BlogPostView({ post, onBack }: Props) {
                 <p className="text-slate-400">載入中...</p>
             ) : (
                 <div className="prose prose-invert prose-lg max-w-none">
-                    <ReactMarkdown>{content}</ReactMarkdown>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                    >
+                        {content}
+                    </ReactMarkdown>
                 </div>
             )}
         </div>

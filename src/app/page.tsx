@@ -9,8 +9,8 @@ import ResearchTab from '@/components/ResearchTab';
 import BlogTab from '@/components/BlogTab';
 import Footer from '@/components/Footer';
 
-type TabType = 'about' | 'works' | 'research' | 'subjects';
-// type TabType = 'about' | 'works' | 'research' | 'blog' | 'subjects';
+// type TabType = 'about' | 'works' | 'research' | 'subjects';
+type TabType = 'about' | 'works' | 'research' | 'blog' | 'subjects';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('about');
@@ -19,7 +19,7 @@ export default function Home() {
     { key: 'about', label: 'About' },
     { key: 'works', label: 'Works' },
     { key: 'research', label: 'Research' },
-    // { key: 'blog', label: 'Blog' },
+    { key: 'blog', label: 'Blog' },
     { key: 'subjects', label: 'Subjects' }
   ];
 

@@ -24,6 +24,14 @@ export const posts: Post[] = [
         summary: '從 callback 到 async/await，理解 Python 非同步程式設計的演進。',
         tags: ['Python', 'Async', 'Backend'],
         file: '/posts/python-async-programming.md'
+    },
+    {
+        slug: 'Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
+        title: 'Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
+        date: '2025-01-05',
+        summary: '從 callback 到 async/await，理解 Python 非同步程式設計的演進。',
+        tags: ['Python', 'Async', 'Backend'],
+        file: '/posts/Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach.md'
     }
 ];
 

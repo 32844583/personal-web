@@ -3,6 +3,9 @@ import { getPostBySlug, getAllPostSlugs } from '@/data/posts';
 import fs from 'fs';
 import path from 'path';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 export function generateStaticParams() {
     return getAllPostSlugs().map((slug) => ({ slug }));
@@ -37,7 +40,12 @@ export default async function BlogPostPage({ params }: Props) {
 
                 {/* prose 自動處理所有 Markdown 樣式 */}
                 <div className="prose prose-invert prose-lg max-w-none">
-                    <ReactMarkdown>{content}</ReactMarkdown>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                    >
+                        {content}
+                    </ReactMarkdown>
                 </div>
             </article>
         </div>
