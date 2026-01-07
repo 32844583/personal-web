@@ -2,9 +2,9 @@ import { Post } from '@/types';
 
 export const posts: Post[] = [
     // {
-    //     slug: '論文 Graph Neural Networks: A Review of Methods and Applications',
-    //     title: '論文 Graph Neural Networks: A Review of Methods and Applications',
-    //     date: '2024-07-23',
+    //     slug: 'Graph Neural Networks',
+    //     title: 'Graph Neural Networks',
+    //     date: '2025-07-23',
     //     summary: 'Graph Neural Network 的起源與原理',
     //     tags: ['GNN'],
     //     file: '/posts/graph-neural-network/index.md'
@@ -12,10 +12,18 @@ export const posts: Post[] = [
     {
         slug: '[Paper][Code] Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
         title: '[Paper][Code] Stock Selection via Spatiotemporal Hypergraph Attention Network A Learning to Rank Approach',
-        date: '2025-01-05',
-        summary: '使用超圖卷積將行業維度應用於股票關聯預測',
-        tags: ['STHAN-SR', 'Industry', 'Time step attention', 'Relationship attention'],
+        date: '2026-01-05',
+        summary: '以行業關聯股票形成圖結構，並經超圖卷積預測股票價格',
+        tags: ['STHAN-SR', 'Industry', 'Time step attention', 'Relationship attention', 'Ranking', 'pytorch'],
         file: '/posts/stock-selection-hypergraph/index.md'
+    },
+    {
+        slug: '[Paper][Code] Temporal Relational Ranking for Stock Prediction',
+        title: '[Paper][Code] Temporal Relational Ranking for Stock Prediction',
+        date: '2025-10-13',
+        summary: '以顯式與隱式節點注意力衡量節點重要性，並經圖卷積預測股票價格',
+        tags: ['RSR', 'TGC', 'Industry', 'Wiki relationship', 'Relationship attention', 'Ranking', 'tensorflow'],
+        file: '/posts/temporal-relational-stock-ranking/index.md'
     }
 ];
 

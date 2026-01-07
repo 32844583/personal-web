@@ -21,12 +21,12 @@ Link: [論文原文](https://ojs.aaai.org/index.php/AAAI/article/view/16127)、[
 這篇論文提出了 STHAN-SR（Spatio-Temporal Hypergraph Attention Network for Stock Ranking）框架。
 
 ### STHAN-SR
-首先利用 LSTM 捕捉每支股票的歷史價格序列特徵，接著透過 Hawkes 注意力機制對不同時間點賦予不同權重，使近期事件的影響較大且隨時間衰減，再將這些時間特徵輸入超圖注意力卷積層，學習不同股票關係對各股票的重要程度，最終輸出每支股票的預測報酬率。
+模型首先利用 LSTM 捕捉各股票的歷史價格序列特徵，並結合 Hawkes 注意力機制動態調整時間權重，以模擬資訊影響力隨時間衰減的特性，生成的序列嵌入向量將作為初始節點特徵輸入超圖注意力卷積層，透過超圖卷積更新節點嵌入向量，讓節點涵蓋與其關聯的股票的序列資訊，模型也得以學習股票間複雜的高階關聯性及其重要程度，最終產出每支股票的預測報酬率。
 ![image](/posts/stock-selection-hypergraph/sthan-sr.png)
 
-### 節點嵌入(Temporal/Hawkes)
+### 序列嵌入(Sequential Embedding)
 #### 單一時間步嵌入(LSTM/GRU)
-在介紹解決方法超圖卷積之前，要先決定輸入圖卷積的節點特徵，作者5個特徵，包括昨日報酬率、長短期趨勢(5、10、20、30日移動平均) 合併成一個向量 $q_\tau \in \mathbb{R}^5$輸入LSTM/GRU(論文描述LSTM，但實作為GRU)為時間步生成嵌入。
+在介紹解決方法超圖卷積之前，要先決定輸入圖卷積的節點特徵，作者5個特徵，包括昨日報酬率、長短期趨勢(5、10、20、30日移動平均) 合併成一個向量 $q_\tau \in \mathbb{R}^5$輸入LSTM/GRU(論文描述LSTM，但實作為GRU)生成時間步嵌入向量。
 
 ```python
 # train/hgat_nasdaq.py
@@ -40,7 +40,7 @@ class HGAT(torch.nn.Module):
 ```
 
 #### 多時間步聚合(LSTM/GRU)
-在透過 LSTM/GRU 得出包含歷史資訊的每一時間步隱藏狀態後，為了生成節點嵌入，這篇論文採用兩種注意力機制來衡量上一步驟生成的不同時間步的重要性，分別是 Temporal Attention、Hawkes Attention，前者讓模型自由學習哪些天重要 Temporal Attention，如公式2：
+在透過 LSTM/GRU 得出包含歷史資訊的每一時間步隱藏狀態後，為了生成節點的序列嵌入向量，這篇論文採用兩種注意力機制來衡量上一步驟生成的不同時間步的重要性，分別是 Temporal Attention、Hawkes Attention，前者讓模型自由學習哪些天重要 Temporal Attention，如公式2：
 $$\zeta(\bar{h}_t) = \sum_{\tau} \lambda_\tau, \quad \lambda_\tau = \beta_\tau h_\tau, \quad \beta_\tau = \frac{\exp(h_\tau^T W \bar{h}_t)}{\sum_{\tau} \exp(h_\tau^T W \bar{h}_t)}$$
 
 - $h_\tau$：第 $\tau$ 天的 LSTM 隱藏狀態
@@ -142,7 +142,8 @@ with torch.no_grad():  # 不計算梯度
     output_test = model(...)
 ```
 
-### 定義超圖（Hypergraph）
+### 關係嵌入(Relational Embedding)
+#### 定義超圖（Hypergraph）
 作為超圖的基礎連接單位超邊（hyperedge），可以同時連接任意數量的節點，論文依據 GICS（全球行業分類標準）來定義產業超邊，所有屬於同一產業的股票會被一條超邊連接起來，以下圖的醫療行業為例，就包括股票 Vertex、Moderna、Regeneron，這些被同一超邊連接的股票會**呈現同步的價格趨勢**，如之前提到的 COVID 案例。
 
 ![image](/posts/stock-selection-hypergraph/hypergraph-structure.png)
@@ -183,9 +184,8 @@ tensor([1., 1., 1., 1., 1., 1.]))
 output = model(torch.FloatTensor(emb_batch).to(device), incidence_edge[0].to(device))
 ```
 
-### 定義超圖卷積層（HypergraphConv）
-
-在超圖卷積運算中，每支股票根據同一超邊內其他股票的資訊來更新自己的表示，這樣同一產業的股票就能透過共享的超邊交換資訊，另外，PyG 的 HypergraphConv 可以指定是否使用卷積注意力，讓模型學習**每條超邊對每支股票的重要程度**不同，這樣可以區分出哪些產業關係對特定股票的價格預測更為關鍵，例如，對科技股而言，「同屬科技行業」的超邊可能更重要，對金融股而言，「同一母公司」的超邊可能更重要，運作方式如公式8：
+#### 定義超圖卷積層（HypergraphConv）
+在超圖卷積運算中，每支股票根據同一超邊內其他股票的資訊來更新節點嵌入向量，這樣同一產業的股票就能透過共享的超邊交換資訊，另外，PyG 的 HypergraphConv 可以指定是否使用卷積注意力，讓模型學習**每條超邊對每支股票的重要程度**不同，這樣可以區分出哪些產業關係對特定股票的價格預測更為關鍵，例如，對科技股而言，「同屬科技行業」的超邊可能更重要，對金融股而言，「同一母公司」的超邊可能更重要，運作方式如公式8：
 $$\mathbf{X}^{(l+1)} = \bigoplus_{k=1}^{K} \text{ELU}\left(\mathbf{D}_v^{-\frac{1}{2}} \mathbf{H}^{at}_k \mathbf{W} \mathbf{D}_e^{-1} \mathbf{H}^{at^T}_k \mathbf{D}_v^{-\frac{1}{2}} \mathbf{X}^{(l)} \mathbf{P}_k\right)$$
 
 - $\mathbf{X}^{(l)}$：第 $l$ 層的節點特徵矩陣，維度 $\mathbb{R}^{|V| \times F^{(l)}}$
@@ -370,11 +370,11 @@ def get_batch(self, offset=None):
 
 ```
 # 研究結果
-### Hawkes 注意力視覺化分析
+### Hawkes 能捕捉近期的趨勢變化
 Hawkes 注意力能準確捕捉**近期的趨勢變化**（窗口末端的上漲），而一般時間注意力 Temporal Attention 權重分散，反映整體趨勢但錯失近期轉折，在預測成效，Hawkes 預測更接近實際值。
 ![image](/posts/stock-selection-hypergraph/hawkes-attention.png)
 
-### Hawkes 注意力視覺化分析
+### 模型表現顯著優秀
 在三個市場（NASDAQ、NYSE、東京證交所）超過六年的數據測試中，STHAN-SR 在所有評估指標上都顯著優於基準方法（p < 0.01）。
 ![image](/posts/stock-selection-hypergraph/performance-results.png)
 
