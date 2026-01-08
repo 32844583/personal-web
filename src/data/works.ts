@@ -19,14 +19,14 @@ export const works: WorkItem[] = [
         ],
         tech: ['FastAPI', 'Langchain', 'Teams Bot', 'Kibana', 'Prometheus', 'k8s', 'ArgoCD', 'Azure DevOps', 'Harbor'],
         challenges: [
-            {
-                challenge: '工具導向不夠精確',
-                solution: '在有限的模型資源下，我認為可以在定義每個 Tool 時，為其撰寫極其清晰、具體的描述，暫時性解決這個問題。'
-            },
-            {
-                challenge: 'Agent 無法同時串接多個工具',
-                solution: '在有限的模型資源下，我認為可以將常見的多步驟流程先封裝成一個新的、更強大的 Tool，暫時性解決這個問題。'
-            }
+            // {
+            //     challenge: '工具導向不夠精確',
+            //     solution: '在有限的模型資源下，我認為可以在定義每個 Tool 時，為其撰寫極其清晰、具體的描述，暫時性解決這個問題。'
+            // },
+            // {
+            //     challenge: 'Agent 無法同時串接多個工具',
+            //     solution: '在有限的模型資源下，我認為可以將常見的多步驟流程先封裝成一個新的、更強大的 Tool，暫時性解決這個問題。'
+            // }
         ],
         screenshot: '/screenshots/querymaster.png'
     },
@@ -48,10 +48,10 @@ export const works: WorkItem[] = [
         ],
         tech: ['Flask', 'SQLite', 'Python', 'HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap', 'Git'],
         challenges: [
-            {
-                challenge: '非典型的團隊合作與目標凝聚',
-                solution: '解決此問題的關鍵在於策略性地轉變領導目標。我將首要任務從追求技術創新調整為確保團隊良好合作，並導入了工廠模式，從源頭設計了一個易於擴充與分工的模組化架構。'
-            }
+            // {
+            //     challenge: '非典型的團隊合作與目標凝聚',
+            //     solution: '解決此問題的關鍵在於策略性地轉變領導目標。我將首要任務從追求技術創新調整為確保團隊良好合作，並導入了工廠模式，從源頭設計了一個易於擴充與分工的模組化架構。'
+            // }
         ],
         screenshot: '/screenshots/stockmate.png'
     },
@@ -73,10 +73,10 @@ export const works: WorkItem[] = [
         ],
         tech: ['Flask', 'HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap', 'Git', 'Bitbucket'],
         challenges: [
-            {
-                challenge: '畫面顯示與即時幀率的非同步問題',
-                solution: '在每一次渲染操作前，加入了準備狀態的判斷程序，這個程序會確保當前畫格已完全渲染完成後，才允許使用者進行下一步操作。雖然這個機制稍微犧牲了播放的流暢度，但它成功確保了畫面的精準度，為高品質的數據標註提供了可靠的技術保障。'
-            }
+            // {
+            //     challenge: '畫面顯示與即時幀率的非同步問題',
+            //     solution: '在每一次渲染操作前，加入了準備狀態的判斷程序，這個程序會確保當前畫格已完全渲染完成後，才允許使用者進行下一步操作。雖然這個機制稍微犧牲了播放的流暢度，但它成功確保了畫面的精準度，為高品質的數據標註提供了可靠的技術保障。'
+            // }
         ],
         screenshot: '/screenshots/annotation-platform.png'
     },
@@ -98,14 +98,14 @@ export const works: WorkItem[] = [
         ],
         tech: ['Django', 'PostgreSQL', 'Nginx', 'Line Developer', 'OpenAI API', 'Matplotlib'],
         challenges: [
-            {
-                challenge: '缺乏繁體中文的情感分析模型',
-                solution: '除了串接 Google 翻譯 API，也可以透過提示詞引導模型直接判斷分析情感。'
-            },
-            {
-                challenge: 'AI 回覆模式缺乏一致性',
-                solution: '透過精心設計固定的提示詞模板 (Prompt Template)，可以更有效地引導和約束大型語言模型的輸出，能讓 AI 小天使的回覆風格、語氣和內容結構都標準化，從而提供更優質、更穩定的使用者體驗。'
-            }
+            // {
+            //     challenge: '缺乏繁體中文的情感分析模型',
+            //     solution: '除了串接 Google 翻譯 API，也可以透過提示詞引導模型直接判斷分析情感。'
+            // },
+            // {
+            //     challenge: 'AI 回覆模式缺乏一致性',
+            //     solution: '透過精心設計固定的提示詞模板 (Prompt Template)，可以更有效地引導和約束大型語言模型的輸出，能讓 AI 小天使的回覆風格、語氣和內容結構都標準化，從而提供更優質、更穩定的使用者體驗。'
+            // }
         ],
         screenshot: '/screenshots/diary-linebot.png'
     }
