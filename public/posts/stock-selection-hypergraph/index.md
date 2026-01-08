@@ -69,10 +69,10 @@ $$z_t = \sum_{\tau=0, \Delta t_\tau \geq 0} \left( \lambda_\tau + \epsilon \cdot
 
 
 
-- $\epsilon$(`ae`)：激勵參數控制近期事件影響的放大程度
-- $\gamma$(`ab`)：衰減參數控制影響力衰減的速度
-- $\Delta t_\tau$(`delta`)：當前時間與過去時間 τ 的時間差
-- $e^{-\gamma \Delta t_\tau}$(`bt`)：越久遠的事件，影響力衰減越多
+- $\epsilon$：激勵參數控制近期事件影響的放大程度
+- $\gamma$：衰減參數控制影響力衰減的速度
+- $\Delta t_\tau$：當前時間與過去時間 τ 的時間差
+- $e^{-\gamma \Delta t_\tau}$：越久遠的事件，影響力衰減越多
 - $z_t$：最終時間特徵
 - $\lambda_\tau$：Temporal Attention單一時間步的加權隱藏狀態($\beta_\tau h_\tau$)。
 
