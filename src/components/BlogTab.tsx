@@ -47,6 +47,11 @@ export default function BlogTab() {
 
     return (
         <>
+            {/* Intro Text */}
+            <div className="mb-6 text-slate-600 leading-relaxed">
+                這個 blog 版面整理了我閱讀過的論文。
+            </div>
+
             {/* Controls */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 {/* Tag Filter */}
@@ -55,7 +60,7 @@ export default function BlogTab() {
                         onClick={() => setSelectedTag(null)}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${!selectedTag
                             ? 'bg-blue-600 text-white'
-                            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                            : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                             }`}
                     >
                         All
@@ -66,7 +71,7 @@ export default function BlogTab() {
                             onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
                             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedTag === tag
                                 ? 'bg-blue-600 text-white'
-                                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                                : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                                 }`}
                         >
                             {tag}
@@ -77,7 +82,7 @@ export default function BlogTab() {
                 {/* Sort Button */}
                 <button
                     onClick={() => setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest')}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-slate-600 rounded-lg transition-colors text-sm font-medium border border-slate-200 shadow-sm"
                 >
                     <Calendar size={18} />
                     {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
@@ -89,25 +94,25 @@ export default function BlogTab() {
                     <button
                         key={post.slug}
                         onClick={() => setSelectedPost(post)}  // 改這裡
-                        className="block w-full text-left bg-slate-800 rounded-lg border border-slate-700 p-6 hover:border-blue-500 transition-all group"
+                        className="block w-full text-left bg-white rounded-lg border border-slate-200 p-6 hover:border-blue-500 transition-all group shadow-sm"
                     >
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                                     {post.title}
                                 </h3>
-                                <p className="text-slate-400 text-sm mb-3 flex items-center gap-2">
+                                <p className="text-slate-500 text-sm mb-3 flex items-center gap-2">
                                     <Calendar size={14} />
                                     {formatDate(post.date)}
                                 </p>
-                                <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                                <p className="text-slate-600 text-sm leading-relaxed mb-4">
                                     {post.summary}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
                                     {post.tags.map(tag => (
                                         <span
                                             key={tag}
-                                            className="inline-flex items-center gap-1 px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs"
+                                            className="inline-flex items-center gap-1 px-2 py-1 bg-slate-100 text-slate-600 rounded text-xs"
                                         >
                                             <Tag size={10} />
                                             {tag}
@@ -115,7 +120,7 @@ export default function BlogTab() {
                                     ))}
                                 </div>
                             </div>
-                            <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                            <div className="flex items-center text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
                                 閱讀更多
                                 <ArrowRight size={16} className="ml-1" />
                             </div>
@@ -126,7 +131,7 @@ export default function BlogTab() {
 
             {/* Empty State */}
             {filteredPosts.length === 0 && (
-                <div className="text-center py-12 text-slate-400">
+                <div className="text-center py-12 text-slate-500">
                     <p>沒有找到相關文章</p>
                 </div>
             )}

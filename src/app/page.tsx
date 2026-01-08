@@ -24,7 +24,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900">
 
       {/* Main Content */}
       <section className="max-w-[95%] mx-auto px-4 py-8">
@@ -40,9 +40,9 @@ export default function Home() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`px-6 py-3 md:px-8 md:py-4 rounded-lg text-sm md:text-base font-semibold transition-all ${activeTab === tab.key
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-slate-800 text-white hover:bg-slate-700'
+                  className={`px-6 py-3 md:px-8 md:py-4 rounded-lg text-sm md:text-base font-semibold transition-all shadow-sm ${activeTab === tab.key
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                     }`}
                 >
                   {tab.label}
@@ -51,7 +51,7 @@ export default function Home() {
             </div>
 
             {/* Content Area */}
-            <div className="bg-slate-800/50 backdrop-blur-xl p-6 md:p-8 rounded-lg border border-slate-700 flex-1">
+            <div className="bg-white/80 backdrop-blur-xl p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm flex-1">
               {activeTab === 'about' && <AboutTab />}
               {activeTab === 'works' && <WorksTab />}
               {activeTab === 'research' && <ResearchTab />}

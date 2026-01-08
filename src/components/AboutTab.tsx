@@ -88,7 +88,7 @@ export default function AboutTab() {
         const regex = new RegExp(highlight, 'g');
         result = result.replace(
           regex,
-          `<span class="text-blue-400 font-semibold">${highlight}</span>`
+          `<span class="text-blue-600 font-semibold">${highlight}</span>`
         );
       }
     });
@@ -106,7 +106,7 @@ export default function AboutTab() {
     const paragraphs = displayedText.split('\n\n').filter(p => p.length > 0);
 
     if (paragraphs.length === 0) {
-      return <p className="inline"><span className="inline-block w-2 h-5 bg-white animate-blink align-middle" /></p>;
+      return <p className="inline"><span className="inline-block w-2 h-5 bg-black animate-blink align-middle" /></p>;
     }
 
     return paragraphs.map((para, idx) => {
@@ -119,7 +119,7 @@ export default function AboutTab() {
         >
           <span dangerouslySetInnerHTML={{ __html: renderTextWithHighlights(para) }} />
           {isLastParagraph && (
-            <span className="inline-block w-2 h-5 bg-white ml-1 animate-blink align-middle" />
+            <span className="inline-block w-2 h-5 bg-black ml-1 animate-blink align-middle" />
           )}
         </p>
       );
@@ -129,18 +129,18 @@ export default function AboutTab() {
   return (
     <div className="space-y-8">
       {/* Bio Section - 帶有 Intro 標籤 */}
-      <div className="relative bg-slate-700/30 rounded-lg p-6 border border-slate-600">
-        <span className="absolute -top-3 left-4 bg-slate-800 px-3 py-1 text-sm font-semibold text-blue-300">
+      <div className="relative bg-white rounded-lg p-6 border border-slate-200 shadow-sm">
+        <span className="absolute -top-3 left-4 bg-white px-3 py-1 text-sm font-semibold text-blue-600 border border-slate-200 shadow-sm rounded">
           Intro
         </span>
-        <div className="text-slate-200 text-lg leading-relaxed">
+        <div className="text-slate-700 text-lg leading-relaxed">
           {getDisplayTextWithCursor()}
         </div>
       </div>
 
       {/* Skills Section - 帶有 Skills 標籤 */}
-      <div className="relative bg-slate-700/30 rounded-lg p-6 border border-slate-600">
-        <span className="absolute -top-3 left-4 bg-slate-800 px-3 py-1 text-sm font-semibold text-blue-300">
+      <div className="relative bg-white rounded-lg p-6 border border-slate-200 shadow-sm">
+        <span className="absolute -top-3 left-4 bg-white px-3 py-1 text-sm font-semibold text-blue-600 border border-slate-200 shadow-sm rounded">
           Skills
         </span>
 
@@ -149,8 +149,8 @@ export default function AboutTab() {
           <button
             onClick={() => setActiveCategory(-1)}
             className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeCategory === -1
-              ? 'bg-blue-600 text-white shadow-lg'
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
               }`}
           >
             All
@@ -160,8 +160,8 @@ export default function AboutTab() {
               key={idx}
               onClick={() => setActiveCategory(idx)}
               className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeCategory === idx
-                ? 'bg-blue-600 text-white shadow-lg'
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                 }`}
             >
               {category.title}
@@ -177,7 +177,7 @@ export default function AboutTab() {
               <div key={tool.name} className="flex flex-col gap-2">
                 {/* Tool Icon and Name */}
                 <div className="flex flex-col items-center gap-2">
-                  <div className="w-16 h-16 rounded-lg bg-slate-600 border-2 border-slate-500 flex items-center justify-center overflow-hidden p-2">
+                  <div className="w-16 h-16 rounded-lg bg-white border-2 border-slate-200 flex items-center justify-center overflow-hidden p-2 shadow-sm">
                     {tool.icon ? (
                       <img
                         src={tool.icon}
@@ -185,12 +185,12 @@ export default function AboutTab() {
                         className="w-12 h-12 object-contain"
                       />
                     ) : (
-                      <span className="text-lg font-bold text-slate-300">
+                      <span className="text-lg font-bold text-slate-700">
                         {tool.name.substring(0, 3).toUpperCase()}
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-slate-200 text-center font-medium">
+                  <p className="text-sm text-slate-700 text-center font-medium">
                     {tool.name}
                   </p>
                 </div>
@@ -203,7 +203,7 @@ export default function AboutTab() {
                         key={bar}
                         className={`w-5 h-1.5 rounded-full transition-all duration-300 ${bar <= bars
                           ? 'bg-blue-500'
-                          : 'bg-slate-700'
+                          : 'bg-slate-200'
                           }`}
                       />
                     ))}

@@ -37,21 +37,21 @@ export default function BlogPostView({ post, onBack }: Props) {
             {/* 返回按鈕 */}
             <button
                 onClick={onBack}
-                className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
+                className="flex items-center gap-2 text-slate-600 hover:text-blue-600 mb-6 transition-colors"
             >
                 <ArrowLeft size={18} />
                 返回文章列表
             </button>
 
             {/* 文章標題 */}
-            <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-            <p className="text-slate-400 mb-8">{post.date}</p>
+            <h1 className="text-3xl font-bold mb-4 text-slate-900">{post.title}</h1>
+            <p className="text-slate-500 mb-8">{post.date}</p>
 
             {/* 文章內容 */}
             {loading ? (
-                <p className="text-slate-400">載入中...</p>
+                <p className="text-slate-500">載入中...</p>
             ) : (
-                <div className="prose prose-invert prose-lg max-w-none">
+                <div className="prose prose-slate prose-lg max-w-none">
                     <ReactMarkdown
                         remarkPlugins={[remarkMath]}
                         rehypePlugins={[rehypeKatex]}

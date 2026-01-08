@@ -53,13 +53,13 @@ export default function SubjectTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 h-full">
       {/* 左側：能力六角圖 */}
-      <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 flex flex-col h-[600px]">
-        <h3 className="text-xl font-bold text-blue-300 mb-4 text-center">能力分布圖</h3>
+      <div className="bg-white rounded-lg p-6 border border-slate-200 flex flex-col h-[600px] shadow-sm">
+        <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">能力分布圖</h3>
         <div className="flex-1 flex items-center justify-center min-h-0">
-          <svg 
-            width="100%" 
-            height="100%" 
-            viewBox="0 0 400 450" 
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 400 450"
             className="max-w-[400px] max-h-[450px]"
           >
             {/* 繪製背景網格 */}
@@ -71,15 +71,15 @@ export default function SubjectTab() {
                 const y = 200 + radius * Math.sin(angle);
                 return `${x},${y}`;
               }).join(' ');
-              
+
               return (
                 <polygon
                   key={level}
                   points={points}
                   fill="none"
-                  stroke={level === 100 ? '#475569' : '#334155'}
+                  stroke={level === 100 ? '#94a3b8' : '#cbd5e1'}
                   strokeWidth={level === 100 ? '2' : '1'}
-                  opacity={level === 100 ? '0.5' : '0.3'}
+                  opacity={level === 100 ? '0.5' : '0.5'}
                 />
               );
             })}
@@ -96,9 +96,9 @@ export default function SubjectTab() {
                   y1="200"
                   x2={x}
                   y2={y}
-                  stroke="#334155"
+                  stroke="#cbd5e1"
                   strokeWidth="1"
-                  opacity="0.3"
+                  opacity="0.5"
                 />
               );
             })}
@@ -124,14 +124,14 @@ export default function SubjectTab() {
               const x = 200 + radius * Math.cos(angle);
               const y = 200 + radius * Math.sin(angle);
               const isActive = activeCategory === i;
-              
+
               return (
                 <g key={i}>
                   <circle
                     cx={x}
                     cy={y}
                     r={isActive ? '8' : '5'}
-                    fill={isActive ? '#60a5fa' : '#3b82f6'}
+                    fill={isActive ? '#3b82f6' : '#60a5fa'}
                     stroke="#fff"
                     strokeWidth="2"
                     style={{ cursor: 'pointer', transition: 'all 0.2s' }}
@@ -157,10 +157,10 @@ export default function SubjectTab() {
               const x = 200 + labelRadius * Math.cos(angle);
               const y = 200 + labelRadius * Math.sin(angle);
               const isActive = activeCategory === i;
-              
+
               return (
-                <g 
-                  key={i} 
+                <g
+                  key={i}
                   style={{ cursor: 'pointer' }}
                   onClick={() => setActiveCategory(i)}
                 >
@@ -169,7 +169,7 @@ export default function SubjectTab() {
                     y={y}
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className={`font-semibold text-sm ${isActive ? 'fill-blue-300' : 'fill-slate-300'}`}
+                    className={`font-semibold text-sm ${isActive ? 'fill-blue-700' : 'fill-slate-600'}`}
                   >
                     {item.category}
                   </text>
@@ -178,7 +178,7 @@ export default function SubjectTab() {
                     y={y + 18}
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className={`font-bold text-base ${isActive ? 'fill-blue-400' : 'fill-slate-400'}`}
+                    className={`font-bold text-base ${isActive ? 'fill-blue-600' : 'fill-slate-500'}`}
                   >
                     {item.score.toFixed(1)} ({item.count})
                   </text>
@@ -193,12 +193,12 @@ export default function SubjectTab() {
       <div className="flex flex-col space-y-4 h-[600px]">
         {/* 標題和排序按鈕 */}
         <div className="flex items-center justify-between flex-shrink-0">
-          <h3 className="text-2xl font-bold text-blue-300">
+          <h3 className="text-2xl font-bold text-blue-700">
             {subjectCategories[activeCategory].title}
           </h3>
           <button
             onClick={toggleSort}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-slate-600 rounded-lg transition-colors text-sm font-medium border border-slate-200 shadow-sm"
           >
             {sortBy === 'grade' ? <GraduationCap size={18} /> : <Award size={18} />}
             {sortBy === 'grade' ? '按年級' : '按成績'}
@@ -211,21 +211,20 @@ export default function SubjectTab() {
           {sortedSubjects.map((subject) => {
             const filledBars = getFilledBars(subject.score);
             return (
-              <div key={subject.name} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+              <div key={subject.name} className="bg-white rounded-lg p-4 border border-slate-200 shadow-sm">
                 {/* Subject Name, Grade and Type */}
                 <div className="flex justify-between items-center mb-3">
-                  <h4 className="text-lg font-semibold text-slate-200">
+                  <h4 className="text-lg font-semibold text-slate-800">
                     {subject.name}
                   </h4>
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/50">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 border border-purple-200">
                       {subject.grade}
                     </span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      subject.type === '必修'
-                        ? 'bg-blue-500/20 text-blue-300 border border-blue-500/50'
-                        : 'bg-green-500/20 text-green-300 border border-green-500/50'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${subject.type === '必修'
+                      ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                      : 'bg-green-100 text-green-700 border border-green-200'
+                      }`}>
                       {subject.type}
                     </span>
                   </div>
@@ -236,19 +235,18 @@ export default function SubjectTab() {
                   {/* Progress Bar */}
                   <div className="flex-1 flex gap-1">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((bar) => (
-                      <div 
+                      <div
                         key={bar}
-                        className={`flex-1 h-3 rounded-sm transition-all duration-300 ${
-                          bar <= filledBars 
-                            ? 'bg-blue-500' 
-                            : 'bg-slate-700'
-                        }`}
+                        className={`flex-1 h-3 rounded-sm transition-all duration-300 ${bar <= filledBars
+                          ? 'bg-blue-500'
+                          : 'bg-slate-200'
+                          }`}
                       />
                     ))}
                   </div>
-                  
+
                   {/* Score Number */}
-                  <span className="text-2xl font-bold text-blue-400 min-w-[3rem] text-right">
+                  <span className="text-2xl font-bold text-blue-600 min-w-[3rem] text-right">
                     {subject.score}
                   </span>
                 </div>

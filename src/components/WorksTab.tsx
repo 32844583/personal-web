@@ -49,14 +49,14 @@ export default function WorksTab() {
             {/* Controls */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 {/* Category Tabs */}
-                <div className="flex items-center gap-2 bg-slate-700/50 rounded-lg p-1">
+                <div className="flex items-center gap-2 bg-slate-100 rounded-lg p-1 border border-slate-200">
                     {categories.map((cat) => (
                         <button
                             key={cat.key}
                             onClick={() => setCategory(cat.key)}
                             className={`flex items-center gap-1.5 px-3 py-2 rounded-md transition-colors text-sm font-medium ${category === cat.key
-                                ? 'bg-blue-600 text-white'
-                                : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                                ? 'bg-white text-blue-600 shadow-sm'
+                                : 'text-slate-600 hover:text-blue-600 hover:bg-slate-200'
                                 }`}
                         >
                             {cat.icon}
@@ -68,7 +68,7 @@ export default function WorksTab() {
                 {/* Sort Button */}
                 <button
                     onClick={() => setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest')}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-slate-600 rounded-lg transition-colors text-sm font-medium border border-slate-200 shadow-sm"
                 >
                     <Calendar size={18} />
                     {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
@@ -78,7 +78,7 @@ export default function WorksTab() {
             {/* Timeline View */}
             <div className="relative">
                 {/* Timeline Line - 置中對齊圓圈 */}
-                <div className="absolute left-[15px] md:left-[31px] top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-blue-500 via-blue-400 to-slate-600" />
+                <div className="absolute left-[15px] md:left-[31px] top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-blue-500 via-blue-300 to-slate-200" />
 
                 <div className="space-y-6">
                     {filteredWorks.map((work) => {
@@ -90,39 +90,39 @@ export default function WorksTab() {
                             <div key={work.id} className="relative flex gap-4 md:gap-6">
                                 {/* Timeline Dot - 蓋住線 */}
                                 <div className="relative z-10 flex-shrink-0">
-                                    <div className={`w-8 h-8 md:w-16 md:h-16 rounded-full border-4 flex items-center justify-center bg-slate-900 ${work.type === 'public'
+                                    <div className={`w-8 h-8 md:w-16 md:h-16 rounded-full border-4 flex items-center justify-center bg-white shadow-sm ${work.type === 'public'
                                         ? 'border-green-500'
                                         : 'border-orange-500'
                                         }`}>
-                                        <span className="text-[10px] md:text-sm font-bold text-white">
+                                        <span className="text-[10px] md:text-sm font-bold text-slate-700">
                                             {year}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="flex-1 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                                <div className="flex-1 bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
                                     {/* Header - Always Visible */}
                                     <button
                                         onClick={() => toggleExpand(work.id)}
-                                        className="w-full p-4 md:p-6 text-left hover:bg-slate-700/50 transition-colors"
+                                        className="w-full p-4 md:p-6 text-left hover:bg-slate-50 transition-colors"
                                     >
                                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
                                             <div className="flex-1">
                                                 {work.organization && (
-                                                    <p className="text-blue-300 font-medium text-sm flex items-center gap-1.5 mb-1">
+                                                    <p className="text-blue-600 font-medium text-sm flex items-center gap-1.5 mb-1">
                                                         <Building2 size={14} />
                                                         {work.organization}
                                                     </p>
                                                 )}
-                                                <h3 className="text-lg md:text-xl font-bold text-white">
+                                                <h3 className="text-lg md:text-xl font-bold text-slate-900">
                                                     {work.title}
                                                 </h3>
                                             </div>
                                             <div className="flex items-center gap-3 flex-shrink-0">
-                                                <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${work.type === 'public'
-                                                    ? 'bg-green-500/20 text-green-300'
-                                                    : 'bg-orange-500/20 text-orange-300'
+                                                <span className={`px-2 py-0.5 rounded-full text-xs font-semibold border ${work.type === 'public'
+                                                    ? 'bg-green-100 text-green-700 border-green-200'
+                                                    : 'bg-orange-100 text-orange-700 border-orange-200'
                                                     }`}>
                                                     {work.type === 'public' ? 'Public' : 'Private'}
                                                 </span>
@@ -143,14 +143,14 @@ export default function WorksTab() {
                                             {work.period}
                                         </p>
 
-                                        <p className="text-slate-300 text-sm leading-relaxed">
+                                        <p className="text-slate-600 text-sm leading-relaxed">
                                             {work.summary}
                                         </p>
                                     </button>
 
                                     {/* Expanded Content */}
                                     {isExpanded && (
-                                        <div className="border-t border-slate-700 p-4 md:p-6 space-y-6">
+                                        <div className="border-t border-slate-200 p-4 md:p-6 space-y-6">
                                             {/* Screenshot */}
                                             {work.screenshot && (
                                                 <div className="bg-slate-700 rounded-lg border border-slate-600 overflow-hidden">
@@ -164,14 +164,14 @@ export default function WorksTab() {
 
                                             {/* Description */}
                                             <div>
-                                                <h4 className="text-lg font-bold text-blue-300 mb-2">Overview</h4>
-                                                <p className="text-slate-300 text-sm leading-relaxed">{work.description}</p>
+                                                <h4 className="text-lg font-bold text-blue-700 mb-2">Overview</h4>
+                                                <p className="text-slate-600 text-sm leading-relaxed">{work.description}</p>
                                             </div>
 
                                             {/* Highlights */}
                                             <div>
-                                                <h4 className="text-lg font-bold text-blue-300 mb-3">Highlights</h4>
-                                                <ul className="text-slate-300 text-sm space-y-2">
+                                                <h4 className="text-lg font-bold text-blue-700 mb-3">Highlights</h4>
+                                                <ul className="text-slate-600 text-sm space-y-2">
                                                     {work.highlights.map((highlight, idx) => (
                                                         <li key={idx} className="flex items-start gap-2">
                                                             <span className="text-blue-400 mt-0.5 flex-shrink-0">→</span>
@@ -183,12 +183,12 @@ export default function WorksTab() {
 
                                             {/* Technologies */}
                                             <div>
-                                                <h4 className="text-lg font-bold text-blue-300 mb-3">Tech Stack</h4>
+                                                <h4 className="text-lg font-bold text-blue-700 mb-3">Tech Stack</h4>
                                                 <div className="flex flex-wrap gap-2">
                                                     {work.tech.map(tech => (
                                                         <span
                                                             key={tech}
-                                                            className="px-3 py-1.5 bg-blue-900/50 text-blue-300 rounded-lg text-sm font-medium border border-blue-800"
+                                                            className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium border border-blue-200"
                                                         >
                                                             {tech}
                                                         </span>
@@ -199,14 +199,14 @@ export default function WorksTab() {
                                             {/* Challenges */}
                                             {work.challenges.length > 0 && (
                                                 <div>
-                                                    <h4 className="text-lg font-bold text-blue-300 mb-3">Challenges & Solutions</h4>
+                                                    <h4 className="text-lg font-bold text-blue-700 mb-3">Challenges & Solutions</h4>
                                                     <div className="space-y-3">
                                                         {work.challenges.map((item, idx) => (
-                                                            <div key={idx} className="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
-                                                                <h5 className="text-sm font-semibold text-orange-300 mb-2">
+                                                            <div key={idx} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                                                                <h5 className="text-sm font-semibold text-orange-600 mb-2">
                                                                     🔥 {item.challenge}
                                                                 </h5>
-                                                                <p className="text-slate-300 text-sm">
+                                                                <p className="text-slate-600 text-sm">
                                                                     <span className="text-green-300 font-semibold">✓</span> {item.solution}
                                                                 </p>
                                                             </div>
@@ -222,7 +222,7 @@ export default function WorksTab() {
                                                         href={work.github}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-blue-300 text-sm font-medium transition-colors"
+                                                        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-blue-600 text-sm font-medium transition-colors"
                                                     >
                                                         <Github size={18} />
                                                         查看原始碼
@@ -248,7 +248,7 @@ export default function WorksTab() {
 
             {/* Empty State */}
             {filteredWorks.length === 0 && (
-                <div className="text-center py-12 text-slate-400">
+                <div className="text-center py-12 text-slate-500">
                     <p>No works found in this category.</p>
                 </div>
             )}
